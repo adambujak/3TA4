@@ -1,65 +1,109 @@
 /******************************************************************************
-  * @file    GPIO/GPIO_EXTI/Src/main.c
-  * @author  MCD Application Team
-  * @version V1.8.0
-  * @date    21-April-2017
-  * @brief   This example describes how to configure and use GPIOs through
-  *          the STM32L4xx HAL API.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
+  * @file    main.c
+  * @author  3TA4 Lab 2
+  * @version V1.0
+  * @date    01-October-2019
+  * @brief   Reaction time tester
   ******************************************************************************
   */
-
+	
+	
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32L4xx_HAL_Examples
-  * @{
-  */
+/* Private typedefs ----------------------------------------------------------*/
 
-/** @addtogroup GPIO_EXTI
-  * @{
-  */
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+/* Application States Enum */
+typedef enum 
+{
+	APP_STATE_PREGAME = 0,     // LED blinking state, waiting for user input
+	APP_STATE_START,           // Start game state, wait random amount of time to turn LED on
+	APP_STATE_GAME,            // Game in session state
+	APP_STATE_RESULT,          // Result state - display result, and store result if neccessary
+	APP_STATE_CNT              // Number of states
+} app_state_e;              
+
+
+
+/* Timer Types Enum */
+typedef enum 
+{
+	TIMER_TYPE_CONTINUOUS = 0, // Timer continuously generates interrupts
+	TIMER_TYPE_ONE_SHOT,       // Timer generates interrupt once
+	TIMER_TYPE_CNT
+} timer_type_e;
+
+
+
+/* Private defines -----------------------------------------------------------*/
+
+#define TIMER_IRQ_TRIGGERED       1         // Value of timer flag once triggered
+#define TIMER_IRQ_NOT_TRIGGERED   0         // Value of timer flag when not yet triggered
+
+#define BUTTON_IRQ_TRIGGERED      1         // Value of button flag once triggered
+#define BUTTON_IRQ_NOT_TRIGGERED  0         // Value of button flag when not yet triggered
+
+#define GENERAL_TIMER             TIM3      // Timer used to wait certain amount of time
+#define GAME_TIMER                TIM2      // Timer used to measure user reaction time
+
+
+#define INDICATOR_LED             LED4      // Indicator LED
+
+#define GAME_TIMER_PRESCALER      100       // Prescaler for game timer
+
+#define MIN_REACTION_TICK_CNT     10        // Minimum reaction time tick count
+#define MAX_REACTION_TIME         10000     // Maximum reaction time in ms
+
+#define PREGAME_TIMER_PERIOD      250       // delay time between LED toggles in pregame state in ms
+
+
 /* Private macro -------------------------------------------------------------*/
+
+
+
+
+
+
 /* Private variables ---------------------------------------------------------*/
 
-char lcd_buffer[6];    // LCD display buffer
+
+/* Application variables */
+
+app_state_e state = APP_STATE_PREGAME;                               // App state variable
+
+uint32_t reflexRecord = 9999;
+
+uint32_t initialTimerValue = 0;
+uint32_t finalTimerValue   = 0;
+
+
+/* Timer Interrupt Flags */                                       
+																													        
+uint8_t GENERAL_TIMER_FLAG  = TIMER_IRQ_NOT_TRIGGERED;               // General timer interrupt flag
+uint8_t GAME_TIMER_FLAG     = TIMER_IRQ_NOT_TRIGGERED;               // Reaction timer interrupt flag
+
+TIM_HandleTypeDef    GeneralTimer_Handle, GameTimer_Handle;
 
 
 
-__IO HAL_StatusTypeDef Hal_status;  //HAL_ERROR, HAL_TIMEOUT, HAL_OK, of HAL_BUSY 
-uint16_t EE_status=0;
-uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777}; // the emulated EEPROM can save 3 varibles, at these three addresses.
-uint16_t EEREAD;  //to practice reading the BESTRESULT save in the EE, for EE read/write, require uint16_t type
 
+/* Button Interrupt Flags */
+
+uint8_t USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;                 // User button interrupt flag
+																													        
+																			
+/* LCD variables */
+
+char lcd_buffer[6];                                                  // LCD display buffer
+																																    
+																																    
+																																    
+__IO HAL_StatusTypeDef Hal_status;                                   //HAL_ERROR, HAL_TIMEOUT, HAL_OK, of HAL_BUSY 
+uint16_t EE_status=0;                                                
+uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777};        // the emulated EEPROM can save 3 varibles, at these three addresses.
+uint16_t EEREAD;                                                    
+																																    
 
 
 
@@ -73,6 +117,17 @@ RNG_HandleTypeDef Rng_Handle;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
+static void PregameState_Start(void);
+void StartState_Start(void);
+void GameState_Start(void);
+void ResultState_Start(uint32_t);
+void GameTimer_Config(void);
+void updateRecord(uint32_t val);
+void drawTimeToScreen(uint32_t);
+
+uint32_t getGameTimerValue(void);
+static void GeneralTimer_Config(uint16_t timeout_val);
+
 
 
 
@@ -86,84 +141,250 @@ static void Error_Handler(void);
   */
 int main(void)
 {
-  /* STM32L4xx HAL library initialization:
-       - Configure the Flash prefetch
-       - Systick timer is configured by default as source of time base, but user 
-         can eventually implement his proper time base source (a general purpose 
-         timer for example or other time source), keeping in mind that Time base 
-         duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
-         handled in milliseconds basis.
-       - Set NVIC Group Priority to 4
-       - Low Level Initialization
-     */
-	
+	/* Initialize Hardware Abstraction Layer */
 	HAL_Init();
 
   /* Configure the system clock to 4 MHz */
   SystemClock_Config();
  
-	HAL_InitTick(0x0000); //set the systick interrupt priority to the highest
+	/* Set the systick interrupt priority to the highest */
+	HAL_InitTick(0x0000); 
 
-	BSP_LED_Init(LED4);
-	BSP_LED_Init(LED5);
-	BSP_LED_Off(LED4);
+	/* Configure LEDs */
+	BSP_LED_Init(INDICATOR_LED);
+	BSP_LED_Off(INDICATOR_LED);
 
+	/* Configure Display */
 	BSP_LCD_GLASS_Init();
 	
-
-	//BSP_LCD_GLASS_ScrollSentence((uint8_t*) "  mt3ta4 lab2 starter", 1, 200);
-	BSP_LCD_GLASS_DisplayString((uint8_t*)"MT3TA4");	
-	
-
-
-
-
-
-
-
-	
-//******************* use emulated EEPROM ====================================
-	//First, Unlock the Flash Program Erase controller 
-	HAL_FLASH_Unlock();
-		
-// EEPROM Init 
-	EE_status=EE_Init();
-	if(EE_status != HAL_OK)
-  {
-		Error_Handler();
-  }
-// then can write to or read from the emulated EEPROM
-	
+	/* Configure User Input */
+	BSP_JOY_Init(JOY_MODE_EXTI);
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-//*********************use RNG ================================  
-Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Instance a base address. like the timer handles.... 													
-	
-	Hal_status=HAL_RNG_Init(&Rng_Handle);   //go to msp.c to see further low level initiation.
-	
-	if( Hal_status != HAL_OK)
-  {
-    Error_Handler();
-  }
-//then can use RNG
-	
+	PregameState_Start();
 	
 
   /* Infinite loop */
   while (1)
   {
-		
-
+		switch (state)
+		{
+			case APP_STATE_PREGAME:
+				/* If timer interrupt fired */
+				if (GENERAL_TIMER_FLAG == TIMER_IRQ_TRIGGERED)
+				{
+					/* Reset timer flag */
+					GENERAL_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
+					/* Toggle LED */
+					BSP_LED_Toggle(INDICATOR_LED);
+				}
+				/* If user button pressed */
+				if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
+				{
+					/* Reset button flag */
+					USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
+					/* Stop Timer */
+					HAL_TIM_Base_Stop(&GeneralTimer_Handle);
+					/* Reset timer flag */
+					GENERAL_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
+					/* Go to START state */
+					StartState_Start();
+					break;
+				}
+				break;
+			case APP_STATE_START:
+				/* If timer interrupt fired */
+				if (GENERAL_TIMER_FLAG == TIMER_IRQ_TRIGGERED)
+				{
+					/* Reset timer flag */
+					GENERAL_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
+					/* Stop timer */
+					HAL_TIM_Base_Stop(&GeneralTimer_Handle);
+					/* Go to GAME State */
+					GameState_Start();
+					break;
+				}
+				break;
+			case APP_STATE_GAME:
+				/* If user button pressed */
+				if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
+				{
+					/* Reset button flag */
+					USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
+					
+					finalTimerValue = getGameTimerValue();
+					
+					/* Go to RESULT state */
+					ResultState_Start(finalTimerValue - initialTimerValue);
+					break;
+				}
+				/* If timer interrupt fired */
+				if (GAME_TIMER_FLAG == TIMER_IRQ_TRIGGERED)
+				{
+					/* Reset timer flag */
+					GENERAL_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
+					/* Stop timer */
+					HAL_TIM_Base_Stop(&GameTimer_Handle);
+					/* Go to Result State - pass timeout value*/
+					ResultState_Start(0);
+					break;
+				}
+				break;
+			case APP_STATE_RESULT:
+				/* If user button pressed */
+				if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
+				{
+					/* Reset button flag */
+					USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
+					
+					/* Go to PREGAME state */
+					PregameState_Start();
+					break;
+				}
+				break;
+			case APP_STATE_CNT:
+				while(1); // Something has gone wrong
+		}
 	}
 }
+
+void PregameState_Start(void)
+{
+	state = APP_STATE_PREGAME;
+	
+	/* Draw Record to LCD */
+	drawTimeToScreen(reflexRecord);
+	
+	/* Configure Timers */
+  GeneralTimer_Config(PREGAME_TIMER_PERIOD);
+}
+
+void StartState_Start(void)
+{
+	state = APP_STATE_START;
+	
+	uint32_t delayTime = 2500; //Generate random time here
+	
+	/* Configure Timers */
+  GeneralTimer_Config(delayTime);
+	
+	GENERAL_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
+	
+	BSP_LED_Off(INDICATOR_LED);
+}
+void GameState_Start(void)
+{
+	state = APP_STATE_GAME;
+	
+	/* Configure Timers */
+  GameTimer_Config();
+	
+	/* Clear Game Timer Flag */
+	GAME_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
+	
+	initialTimerValue = getGameTimerValue();
+	BSP_LED_On(INDICATOR_LED);
+	
+	if (BSP_JOY_GetState() != JOY_NONE)
+	{
+		PregameState_Start();
+	}
+}
+
+void ResultState_Start(uint32_t reactionTickCount)
+{
+	state = APP_STATE_RESULT;
+
+	if (reactionTickCount < MIN_REACTION_TICK_CNT)
+	{
+		PregameState_Start();
+		return;
+	}
+	
+	uint32_t reactionTime = reactionTickCount * 1000 / (SystemCoreClock / GAME_TIMER_PRESCALER);
+	
+	if (reactionTime < reflexRecord)
+	{
+		updateRecord(reactionTime);
+	}
+	
+	drawTimeToScreen(reactionTime); 
+}
+
+
+void updateRecord(uint32_t val)
+{
+	reflexRecord = val;
+}
+void drawTimeToScreen(uint32_t val)
+{
+	val %= MAX_REACTION_TIME;
+	char str[6] = "      ";
+	snprintf(str, 7, "%dMS   ", val);
+	BSP_LCD_GLASS_DisplayString((uint8_t*)str);
+}
+uint32_t getGameTimerValue(void)
+{
+	return GAME_TIMER->CNT;
+}
+void  GeneralTimer_Config(uint16_t timeout_val)
+{
+  /* Compute the prescaler value to have PreGameTimer counter clock equal to 10 KHz */
+  uint16_t PrescalerValue = (uint16_t) (SystemCoreClock/ 1000) - 1;
+  
+  /* Set GeneralTimer instance */
+  GeneralTimer_Handle.Instance = GENERAL_TIMER; 
+ 
+  GeneralTimer_Handle.Init.Period = timeout_val - 1;
+  GeneralTimer_Handle.Init.Prescaler = PrescalerValue;
+  GeneralTimer_Handle.Init.ClockDivision = 0;
+  GeneralTimer_Handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+	
+	if(HAL_TIM_Base_Init(&GeneralTimer_Handle) != HAL_OK) // this line need to call the callback function _MspInit() in stm32f4xx_hal_msp.c to set up peripheral clock and NVIC..
+	{
+		/* Initialization Error */
+		Error_Handler();
+	}			
+	/*##-2- Start the TIM Base generation in interrupt mode ####################*/
+	/* Start Channel1 */
+	if(HAL_TIM_Base_Start_IT(&GeneralTimer_Handle) != HAL_OK)   //the TIM_XXX_Start_IT function enable IT, and also enable Timer
+																											//so do not need HAL_TIM_BASE_Start() any more.
+	{
+		/* Starting Error */
+		Error_Handler();
+	}  
+}
+
+void  GameTimer_Config(void)
+{
+  /* Compute the prescaler value to have PreGameTimer counter clock equal to 10 KHz */
+  uint32_t PrescalerValue = GAME_TIMER_PRESCALER;
+  
+  /* Set GeneralTimer instance */
+  GameTimer_Handle.Instance = GAME_TIMER; 
+  GameTimer_Handle.Init.Period = (uint32_t) 0xFFFFFFFF; // Set to max value
+  GameTimer_Handle.Init.Prescaler = PrescalerValue;
+  GameTimer_Handle.Init.ClockDivision = 0;
+  GameTimer_Handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+	
+	if(HAL_TIM_Base_Init(&GameTimer_Handle) != HAL_OK) // this line need to call the callback function _MspInit() in stm32f4xx_hal_msp.c to set up peripheral clock and NVIC..
+	{
+		/* Initialization Error */
+		Error_Handler();
+	}			
+	/*##-2- Start the TIM Base generation in interrupt mode ####################*/
+	/* Start Channel1 */
+	if(HAL_TIM_Base_Start_IT(&GameTimer_Handle) != HAL_OK)   //the TIM_XXX_Start_IT function enable IT, and also enable Timer
+																											//so do not need HAL_TIM_BASE_Start() any more.
+	{
+		/* Starting Error */
+		Error_Handler();
+	}  
+}
+
+
+
 
 /**
   * @brief  System Clock Configuration
@@ -257,44 +478,20 @@ void SystemClock_Config(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  switch (GPIO_Pin) {
-			case GPIO_PIN_0: 		               //SELECT button					
-											
-						break;	
-			case GPIO_PIN_1:     //left button						
-						
-							break;
-			case GPIO_PIN_2:    //right button						  to play again.
-					
-							break;
-			case GPIO_PIN_3:    //up button							
-					
-							break;
-			
-			case GPIO_PIN_5:    //down button						
-					
-							break;
-			default://
-						//default
-						break;
-	  } 
+  USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
 }
 
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)   //see  stm32lxx_hal_tim.c for different callback function names. 
-																															//for timer 3 , Timer 3 use update event initerrupt
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)   
 {
-	
-}
-
-
-void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef * htim) //see  stm32fxx_hal_tim.c for different callback function names. 
-{																																//for timer4 
-	
-
-		//clear the timer counter at the end of call back to avoid interrupt interval variation!  in stm32l4xx_hal_tim.c, the counter is not cleared after  OC interrupt
-		__HAL_TIM_SET_COUNTER(htim, 0x0000);   //this macro is defined in stm32l4xx_hal_tim.h
-
+	if (htim->Instance == GENERAL_TIMER)
+	{
+		GENERAL_TIMER_FLAG = TIMER_IRQ_TRIGGERED;
+	}
+	else if (htim->Instance == GAME_TIMER)
+	{
+		GAME_TIMER_FLAG = TIMER_IRQ_TRIGGERED;
+	}
 }
 
 
