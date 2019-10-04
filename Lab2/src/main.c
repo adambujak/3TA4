@@ -445,8 +445,12 @@ static uint16_t getReflexRecord ( void )
 static void setReflexRecord ( void )
 {
 	/* Write to EEPROM */
-	EE_WriteVariable(VirtAddVarTab[0],  reflexRecord);
+	uint16_t i = EE_WriteVariable(VirtAddVarTab[0],  reflexRecord);
+	char str[6] = "      ";
+  snprintf(str, 7, "%dsetr", i);
 	
+  BSP_LCD_GLASS_DisplayString((uint8_t*) str);
+	HAL_Delay(1000);
 }
 
 
