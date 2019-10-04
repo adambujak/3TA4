@@ -532,7 +532,7 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
 				USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
 			break;  
 		case GPIO_PIN_1:     //left button                      
-								
+								USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
 			break;
 		case GPIO_PIN_2:    //right button                        to play again.
 						
@@ -542,7 +542,7 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
 			break;
 		
 		case GPIO_PIN_5:    //down button                       
-				USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+				
 			break;
 		default://
 								//default
