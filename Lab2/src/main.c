@@ -138,6 +138,7 @@ int main(void)
 	{
 		snprintf(lcd_buffer, 6, "%d        ", VarValue);
 		BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
+		HAL_Delay(2000);
 	}
 	else 
 	{
@@ -145,21 +146,14 @@ int main(void)
 		EE_WriteVariable(VirtAddVarTab[0],  VarValue);
 	}
    
-	VarValue = 4;
-	EE_WriteVariable(VirtAddVarTab[0],  VarValue);
 	
-	VarValue = 5;
-	EE_WriteVariable(VirtAddVarTab[0],  VarValue);
-
 
 	VarValue = 6;
-	EE_WriteVariable(VirtAddVarTab[0],  VarValue);
+	uint16_t i = EE_WriteVariable(VirtAddVarTab[0],  VarValue);
+
+	snprintf(lcd_buffer, 6, "%dre     ", i);
+	BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
 	
-	if (EE_ReadVariable(VirtAddVarTab[0],  &VarValue) == 0)
-	{
-		snprintf(lcd_buffer, 6, "%d        ", VarValue);
-		BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
-	}
 	
 	
 	
