@@ -114,8 +114,6 @@ int main(void)
 	BSP_LCD_GLASS_Init();
 	
 
-	//BSP_LCD_GLASS_ScrollSentence((uint8_t*) "  mt3ta4 lab2 starter", 1, 200);
-	BSP_LCD_GLASS_DisplayString((uint8_t*)"MT3TA4");	
 	
 
 
@@ -147,8 +145,21 @@ int main(void)
 		EE_WriteVariable(VirtAddVarTab[0],  VarValue);
 	}
    
+	VarValue = 4;
+	EE_WriteVariable(VirtAddVarTab[0],  VarValue);
 	
+	VarValue = 5;
+	EE_WriteVariable(VirtAddVarTab[0],  VarValue);
+
+
+	VarValue = 6;
+	EE_WriteVariable(VirtAddVarTab[0],  VarValue);
 	
+	if (EE_ReadVariable(VirtAddVarTab[0],  &VarValue) == 0)
+	{
+		snprintf(lcd_buffer, 6, "%d        ", VarValue);
+		BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
+	}
 	
 	
 	
