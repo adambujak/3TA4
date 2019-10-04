@@ -116,6 +116,7 @@ static void drawTimeToScreen ( uint16_t );                // Draw time value to 
 
 static uint32_t getGameTimerValue ( void );               // Get Timer Total Count
 static uint16_t getRandomDelay    ( void );               // Get random value from RNG
+void drawCurrentGameTime      ( void );               // Update LCD while in game
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -181,13 +182,15 @@ int main ( void )
           StartState_Start();
           break;
         }
-                /* If user reset button pressed */
+				/* If user reset button pressed */
         if (USER_RST_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
           /* Claer reset button flag */
           USER_RST_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
           /* Reset Record */
-                    resetReflexRecord();
+					resetReflexRecord();
+					/* Restart state */
+					PregameState_Start();
           break;
         }
         break;
@@ -205,6 +208,7 @@ int main ( void )
         }
         break;
       case APP_STATE_GAME:
+				drawCurrentGameTime();
         /* If user button pressed */
         if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
@@ -296,6 +300,28 @@ void drawTimeToScreen ( uint16_t val )
 uint32_t getGameTimerValue ( void )
 {
   return GAME_TIMER->CNT;
+}
+
+/**
+ * @brief  Draw current time in game
+ * @param  None
+ * @retval None
+ */
+void drawCurrentGameTime ( void )
+{
+	uint32_t reactionTickCount = getGameTimerValue() - initialTimerValue;
+  /* Calculate reaction time in seconds */
+  /*
+   * Formula:
+   * tickCount = number of timer ticks between game start and button release
+   * TimerClockFrequency = SystemClock / Prescaler
+   * time (in ms) = 1000 * tickCount / (TimerClockFrequency)
+   */
+  uint32_t reactionTime = reactionTickCount * 1000
+      / (SystemCoreClock / GAME_TIMER_PRESCALER);
+
+  /* Update LCD */
+  drawTimeToScreen(reactionTime);
 }
 
 /* State managing functions -------------------------------------------------*/
