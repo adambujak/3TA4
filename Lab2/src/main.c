@@ -408,6 +408,7 @@ void ResultState_Start ( uint32_t reactionTickCount )
  */
 void EEPROM_Config ( void )
 {
+	HAL_FLASH_Unlock();
 	/* Initialize EEPROM */
   EE_status=EE_Init();
 	if(EE_status != HAL_OK)
@@ -446,11 +447,6 @@ static void setReflexRecord ( void )
 {
 	/* Write to EEPROM */
 	uint16_t i = EE_WriteVariable(VirtAddVarTab[0],  reflexRecord);
-	char str[6] = "      ";
-  snprintf(str, 7, "%dsetr", i);
-	
-  BSP_LCD_GLASS_DisplayString((uint8_t*) str);
-	HAL_Delay(1000);
 }
 
 
