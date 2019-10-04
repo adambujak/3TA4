@@ -45,7 +45,7 @@ typedef enum
 
 #define GAME_TIMER_PRESCALER      100       // Prescaler for game timer
 
-#define MIN_REACTION_TICK_CNT     10        // Minimum reaction time tick count
+#define MIN_REACTION_TIME         60        // Minimum reaction time in ms
 #define MAX_REACTION_TIME         10000     // Maximum reaction time in ms
 
 #define PREGAME_TIMER_PERIOD      250       // delay time between LED toggles in pregame state in ms
@@ -204,6 +204,14 @@ int main ( void )
           HAL_TIM_Base_Stop(&GeneralTimer_Handle);
           /* Go to GAME State */
           GameState_Start();
+          break;
+        }
+				if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
+        {
+          /* Clear user button flag */
+          USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
+					/* Restart state */
+					PregameState_Start();
           break;
         }
         break;
@@ -398,12 +406,7 @@ void ResultState_Start ( uint32_t reactionTickCount )
 {
   state = APP_STATE_RESULT;
 
-  /* If reaction tick count is too small return to PREGAME state */
-  if (reactionTickCount < MIN_REACTION_TICK_CNT)
-  {
-    PregameState_Start();
-    return;
-  }
+  
 
   /* Calculate reaction time in seconds */
   /*
@@ -415,6 +418,13 @@ void ResultState_Start ( uint32_t reactionTickCount )
   uint32_t reactionTime = reactionTickCount * 1000
       / (SystemCoreClock / GAME_TIMER_PRESCALER);
 
+	/* If reaction tick count is too small return to PREGAME state */
+  if (reactionTickCount < MIN_REACTION_TIME)
+  {
+    PregameState_Start();
+    return;
+  }
+	
   /* If current reaction time is less than record, set record */
   if (reactionTime < reflexRecord)
   {
