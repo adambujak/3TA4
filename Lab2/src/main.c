@@ -134,25 +134,7 @@ int main(void)
 		Error_Handler();
   }
 	
-	if (EE_ReadVariable(VirtAddVarTab[0],  &VarValue) == 0)
-	{
-		snprintf(lcd_buffer, 6, "%d        ", VarValue);
-		BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
-		HAL_Delay(2000);
-	}
-	else 
-	{
-		VarValue = 3;
-		EE_WriteVariable(VirtAddVarTab[0],  VarValue);
-	}
-   
-	
 
-	VarValue = 6;
-	uint16_t i = EE_WriteVariable(VirtAddVarTab[0],  VarValue);
-
-	snprintf(lcd_buffer, 6, "%dre     ", i);
-	BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
 	
 	
 	
@@ -161,7 +143,7 @@ int main(void)
 	
 	
 //*********************use RNG ================================  
-Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Instance a base address. like the timer handles.... 													
+	Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Instance a base address. like the timer handles.... 													
 	
 	Hal_status=HAL_RNG_Init(&Rng_Handle);   //go to msp.c to see further low level initiation.
 	
@@ -170,6 +152,12 @@ Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Insta
     Error_Handler();
   }
 //then can use RNG
+	
+	uint32_t i;
+	HAL_RNG_GenerateRandomNumber(&Rng_Handle, &i);
+	i %= 4000;
+	snprintf(lcd_buffer, 6, "%dr     ", i);
+	BSP_LCD_GLASS_DisplayString((uint8_t*) lcd_buffer);	
 	
 	
 
