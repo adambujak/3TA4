@@ -58,7 +58,7 @@ typedef enum
 
 app_state_e state = APP_STATE_PREGAME;                    // App state variable
 
-uint32_t reflexRecord = 9999;                        			// Record reflex time value
+uint16_t reflexRecord = MAX_REACTION_TIME-1;        			// Record reflex time value
 
 /* To calculate reflex time, we can take the difference between the timers counts */
 
@@ -75,7 +75,14 @@ TIM_HandleTypeDef GameTimer_Handle;                       // Game (Reflex) Timer
 
 /* Button Interrupt Flags */
 
-uint8_t USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;      // User button interrupt flag
+uint8_t USER_BUTTON_FLAG     = BUTTON_IRQ_NOT_TRIGGERED;  // User button interrupt flag
+uint8_t USER_RST_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;  // User button interrupt flag
+
+
+/* EEPROM Declarations */
+uint16_t EE_status=0;
+uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777}; // the emulated EEPROM can save 3 varibles, at these three addresses.
+uint16_t EEREAD;                                          // to practice reading the BESTRESULT save in the EE, for EE read/write, require uint16_t type
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -90,12 +97,17 @@ static void ResultState_Start ( uint32_t );               // Start Result State
 static void GeneralTimer_Config ( uint16_t timeout_val ); // Configure General Timer
 static void GameTimer_Config ( void );                    // Configure Game Timer
 
-static void updateRecord ( uint32_t val );                // Update reflex record time
+static void EEPROM_Config ( void );                       // Configure EEPROM
+static uint16_t getReflexRecord ( void );                 // Get reflex record
+static void setReflexRecord ( void );                     // Set reflex record
 
-static void drawTimeToScreen ( uint32_t );                // Draw time value to LCD
+static void updateRecord ( uint16_t val );                // Update reflex record time
+static void resetReflexRecord ( void );                   // Reset reflex value
+
+static void drawTimeToScreen ( uint16_t );                // Draw time value to LCD
 
 static uint32_t getGameTimerValue ( void );               // Get Timer Total Count
-static uint32_t getRandomValue ( void );                  // Get random value from RNG
+static uint16_t getRandomValue ( void );                  // Get random value from RNG
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -124,6 +136,9 @@ int main ( void )
 
   /* Configure User Input Joystick */
   BSP_JOY_Init(JOY_MODE_EXTI);
+	
+	/* Start EEPROM */
+	EEPROM_Config();
 
   /* Start PREGAME State */
   PregameState_Start();
@@ -145,14 +160,23 @@ int main ( void )
         /* If user button pressed */
         if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
-          /* Reset button flag */
+          /* Clear button flag */
           USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
           /* Stop Timer */
           HAL_TIM_Base_Stop(&GeneralTimer_Handle);
-          /* Reset timer flag */
+          /* Clear timer flag */
           GENERAL_TIMER_FLAG = TIMER_IRQ_NOT_TRIGGERED;
           /* Go to START state */
           StartState_Start();
+          break;
+        }
+				/* If user reset button pressed */
+        if (USER_RST_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
+        {
+          /* Claer reset button flag */
+          USER_RST_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
+          /* Reset Record */
+					resetReflexRecord();
           break;
         }
         break;
@@ -220,17 +244,32 @@ int main ( void )
  * @param  None
  * @retval None
  */
-void updateRecord ( uint32_t val )
+static void updateRecord ( uint16_t val )
 {
   reflexRecord = val;
+	setReflexRecord();
 }
+
+/**
+ * @brief  Reset Reflex Record
+ * @param  None
+ * @retval None
+ */
+static void resetReflexRecord ( void )
+{
+	/* Reset value */
+	reflexRecord = MAX_REACTION_TIME - 1;
+	setReflexRecord();
+}
+
+
 
 /**
  * @brief  Draw time in ms to LCD
  * @param  None
  * @retval None
  */
-void drawTimeToScreen ( uint32_t val )
+void drawTimeToScreen ( uint16_t val )
 {
   val %= MAX_REACTION_TIME;
   char str[6] = "      ";
@@ -253,7 +292,7 @@ uint32_t getGameTimerValue ( void )
  * @param  None
  * @retval (uint32_t) random value
  */
-uint32_t getRandomValue ( void )
+uint16_t getRandomValue ( void )
 {
   return 0;
 }
@@ -359,6 +398,58 @@ void ResultState_Start ( uint32_t reactionTickCount )
   drawTimeToScreen(reactionTime);
 }
 
+
+/* EEPROM functions -------------------------------------------------*/
+
+/**
+ * @brief  Configure EEPROM
+ * @param  None
+ * @retval None
+ */
+void EEPROM_Config ( void )
+{
+	/* Initialize EEPROM */
+  EE_status=EE_Init();
+	if(EE_status != HAL_OK)
+  {
+		Error_Handler();
+  }
+  
+	/* Get reflex record, if not found set to existing value */
+	if (getReflexRecord())
+	{
+		return;
+	}
+	else 
+	{
+		setReflexRecord();
+	}
+}
+
+/**
+ * @brief  Get Reflex Record from EEPROM
+ * @param  None
+ * @retval 1 = Variable found, 0 = not found
+ */
+static uint16_t getReflexRecord ( void )
+{
+	/* Read variable from EEPROM */
+	return (EE_ReadVariable(VirtAddVarTab[0], &reflexRecord) == 0);
+}
+
+/**
+ * @brief  Set Reflex Record in EEPROM
+ * @param  None
+ * @retval None
+ */
+static void setReflexRecord ( void )
+{
+	/* Write to EEPROM */
+	EE_WriteVariable(VirtAddVarTab[0],  reflexRecord);
+	
+}
+
+
 /* Timer config functions -------------------------------------------------*/
 
 /**
@@ -435,7 +526,30 @@ void GameTimer_Config ( void )
  */
 void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
 {
-  USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+  switch (GPIO_Pin) 
+	{
+		case GPIO_PIN_0:                       //SELECT button                  
+				USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+			break;  
+		case GPIO_PIN_1:     //left button                      
+								
+			break;
+		case GPIO_PIN_2:    //right button                        to play again.
+						
+			break;
+		case GPIO_PIN_3:    //up button                         
+						
+			break;
+		
+		case GPIO_PIN_5:    //down button                       
+				USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+			break;
+		default://
+								//default
+			break;
+	} 
+	
+	
 }
 
 /**
