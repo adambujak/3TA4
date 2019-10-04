@@ -58,7 +58,7 @@ typedef enum
 
 app_state_e state = APP_STATE_PREGAME;                    // App state variable
 
-uint16_t reflexRecord = MAX_REACTION_TIME-1;        			// Record reflex time value
+uint16_t reflexRecord = MAX_REACTION_TIME-1;                    // Record reflex time value
 
 /* To calculate reflex time, we can take the difference between the timers counts */
 
@@ -80,9 +80,15 @@ uint8_t USER_RST_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;  // User button interru
 
 
 /* EEPROM Declarations */
+
 uint16_t EE_status=0;
 uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777}; // the emulated EEPROM can save 3 varibles, at these three addresses.
 uint16_t EEREAD;                                          // to practice reading the BESTRESULT save in the EE, for EE read/write, require uint16_t type
+
+/* RNG Declarations */
+
+RNG_HandleTypeDef Rng_Handle;                             // Random number generator handle
+
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -101,13 +107,15 @@ static void EEPROM_Config ( void );                       // Configure EEPROM
 static uint16_t getReflexRecord ( void );                 // Get reflex record
 static void setReflexRecord ( void );                     // Set reflex record
 
+static void RNG_Config ( void );                          // Configure RNG
+
 static void updateRecord ( uint16_t val );                // Update reflex record time
 static void resetReflexRecord ( void );                   // Reset reflex value
 
 static void drawTimeToScreen ( uint16_t );                // Draw time value to LCD
 
 static uint32_t getGameTimerValue ( void );               // Get Timer Total Count
-static uint16_t getRandomValue ( void );                  // Get random value from RNG
+static uint16_t getRandomDelay    ( void );               // Get random value from RNG
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -136,9 +144,12 @@ int main ( void )
 
   /* Configure User Input Joystick */
   BSP_JOY_Init(JOY_MODE_EXTI);
-	
-	/* Start EEPROM */
-	EEPROM_Config();
+    
+    /* Start EEPROM */
+    EEPROM_Config();
+
+    /* Start EEPROM */
+    RNG_Config();
 
   /* Start PREGAME State */
   PregameState_Start();
@@ -170,13 +181,13 @@ int main ( void )
           StartState_Start();
           break;
         }
-				/* If user reset button pressed */
+                /* If user reset button pressed */
         if (USER_RST_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
           /* Claer reset button flag */
           USER_RST_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
           /* Reset Record */
-					resetReflexRecord();
+                    resetReflexRecord();
           break;
         }
         break;
@@ -287,16 +298,6 @@ uint32_t getGameTimerValue ( void )
   return GAME_TIMER->CNT;
 }
 
-/**
- * @brief  Get random value from RNG
- * @param  None
- * @retval (uint32_t) random value
- */
-uint16_t getRandomValue ( void )
-{
-  return 0;
-}
-
 /* State managing functions -------------------------------------------------*/
 
 /**
@@ -324,7 +325,7 @@ void StartState_Start ( void )
 {
   state = APP_STATE_START;
 
-  uint32_t delayTime = 2000 + getRandomValue();
+  uint32_t delayTime = getRandomDelay();
 
   /* Configure Timers */
   GeneralTimer_Config(delayTime);
@@ -398,7 +399,6 @@ void ResultState_Start ( uint32_t reactionTickCount )
   drawTimeToScreen(reactionTime);
 }
 
-
 /* EEPROM functions -------------------------------------------------*/
 
 /**
@@ -408,23 +408,23 @@ void ResultState_Start ( uint32_t reactionTickCount )
  */
 void EEPROM_Config ( void )
 {
-	HAL_FLASH_Unlock();
-	/* Initialize EEPROM */
+    HAL_FLASH_Unlock();
+    /* Initialize EEPROM */
   EE_status=EE_Init();
-	if(EE_status != HAL_OK)
+    if(EE_status != HAL_OK)
   {
-		Error_Handler();
+        Error_Handler();
   }
   
-	/* Get reflex record, if not found set to existing value */
-	if (getReflexRecord())
-	{
-		return;
-	}
-	else 
-	{
-		setReflexRecord();
-	}
+    /* Get reflex record, if not found set to existing value */
+    if (getReflexRecord())
+    {
+        return;
+    }
+    else 
+    {
+        setReflexRecord();
+    }
 }
 
 /**
@@ -434,8 +434,8 @@ void EEPROM_Config ( void )
  */
 static uint16_t getReflexRecord ( void )
 {
-	/* Read variable from EEPROM */
-	return (EE_ReadVariable(VirtAddVarTab[0], &reflexRecord) == 0);
+    /* Read variable from EEPROM */
+    return (EE_ReadVariable(VirtAddVarTab[0], &reflexRecord) == 0);
 }
 
 /**
@@ -445,9 +445,48 @@ static uint16_t getReflexRecord ( void )
  */
 static void setReflexRecord ( void )
 {
-	/* Write to EEPROM */
-	uint16_t i = EE_WriteVariable(VirtAddVarTab[0],  reflexRecord);
+    /* Write to EEPROM */
+    uint16_t i = EE_WriteVariable(VirtAddVarTab[0],  reflexRecord);
 }
+
+
+
+/* RNG functions -------------------------------------------------*/
+
+/**
+ * @brief  Configure RNG
+ * @param  None
+ * @retval None
+ */
+void RNG_Config ( void )
+{
+    Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Instance a base address. like the timer handles....                          
+  
+  uint32_t Hal_status=HAL_RNG_Init(&Rng_Handle);   //go to msp.c to see further low level initiation.
+  
+  if( Hal_status != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+ * @brief  Generate random time delay
+ * @param  None
+ * @retval Random time delay
+ */
+static uint16_t getRandomDelay ( void )
+{
+    /* Generate random time */
+    uint32_t time;
+  HAL_RNG_GenerateRandomNumber(&Rng_Handle, &time);
+  /* Make time between 0 and 3499 */
+    time %= 3500;
+    /* Minimum delay is 500 ms */
+    time += 500;
+    return ((uint16_t) time);
+}
+
 
 
 /* Timer config functions -------------------------------------------------*/
@@ -527,29 +566,29 @@ void GameTimer_Config ( void )
 void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
 {
   switch (GPIO_Pin) 
-	{
-		case GPIO_PIN_0:                       //SELECT button                  
-				USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
-			break;  
-		case GPIO_PIN_1:     //left button                      
-								USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
-			break;
-		case GPIO_PIN_2:    //right button                        to play again.
-						
-			break;
-		case GPIO_PIN_3:    //up button                         
-						
-			break;
-		
-		case GPIO_PIN_5:    //down button                       
-				
-			break;
-		default://
-								//default
-			break;
-	} 
-	
-	
+    {
+        case GPIO_PIN_0:                       //SELECT button                  
+                USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+            break;  
+        case GPIO_PIN_1:     //left button                      
+                                USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+            break;
+        case GPIO_PIN_2:    //right button                        to play again.
+                        
+            break;
+        case GPIO_PIN_3:    //up button                         
+                        
+            break;
+        
+        case GPIO_PIN_5:    //down button                       
+                
+            break;
+        default://
+                                //default
+            break;
+    } 
+    
+    
 }
 
 /**
@@ -608,7 +647,7 @@ void SystemClock_Config ( void )
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6; // RCC_MSIRANGE_6 is for 4Mhz. _7 is for 8 Mhz, _9 is for 16..., _10 is for 24 Mhz, _11 for 48Hhz
   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
 
-//	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+//  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
 
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
