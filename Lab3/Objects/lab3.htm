@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lab3.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lab3.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Oct 28 01:56:02 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Oct 28 03:02:44 2019
 <BR><P>
 <H3>Maximum Stack Usage =        312 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1040,11 +1040,12 @@ Global Symbols
 
 <P><STRONG><a name="[d8]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[c9]"></a>clearJoystickFlags</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.clearJoystickFlags))
-<BR><BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSetTimeState
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayTimeState
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayPastTimesState
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayDateState
+<P><STRONG><a name="[c4]"></a>clearJoystickFlags</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.clearJoystickFlags))
+<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSetTimeState
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayTimeState
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayPastTimesState
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayDateState
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[b4]"></a>displayDate</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, main.o(i.displayDate))
@@ -1054,7 +1055,7 @@ Global Symbols
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bcd_decimal
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayDateState
+<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayDateState
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1066,7 +1067,7 @@ Global Symbols
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getPastTimes
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayPastTimesState
+<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayPastTimesState
 </UL>
 
 <P><STRONG><a name="[b9]"></a>displaySetTime</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, main.o(i.displaySetTime))
@@ -1088,7 +1089,7 @@ Global Symbols
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bcd_decimal
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayTimeState
+<BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayTimeState
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1159,7 +1160,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c8]"></a>incrementTimeSettingState</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.incrementTimeSettingState))
+<P><STRONG><a name="[c9]"></a>incrementTimeSettingState</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.incrementTimeSettingState))
 <BR><BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1172,7 +1173,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incrementTimeSetting
 </UL>
 
-<P><STRONG><a name="[5b]"></a>main</STRONG> (Thumb, 342 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[5b]"></a>main</STRONG> (Thumb, 334 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 312<LI>Call Chain = main &rArr; BSP_LCD_GLASS_Init &rArr; LCD_MspInit &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLLSAI2_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_Init
@@ -1189,52 +1190,53 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_JOY_Init
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSP_JOY_GetState
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateTimeSetScreen
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSetTimeState
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayTimeState
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayPastTimesState
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayDateState
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incrementTimeSettingState
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSetTimeState
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayTimeState
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayPastTimesState
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startDisplayDateState
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incrementTimeSettingState
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incrementTimeSetting
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displayTime
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displayDate
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_Config
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_AlarmAConfig
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[c4]"></a>startDisplayDateState</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.startDisplayDateState))
+<P><STRONG><a name="[c5]"></a>startDisplayDateState</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.startDisplayDateState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = startDisplayDateState &rArr; displayDate &rArr; BSP_LCD_GLASS_ScrollSentence &rArr; BSP_LCD_GLASS_DisplayString &rArr; WriteChar &rArr; HAL_LCD_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displayDate
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c5]"></a>startDisplayPastTimesState</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.startDisplayPastTimesState))
+<P><STRONG><a name="[c6]"></a>startDisplayPastTimesState</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.startDisplayPastTimesState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = startDisplayPastTimesState &rArr; displayPastTimes &rArr; BSP_LCD_GLASS_ScrollSentence &rArr; BSP_LCD_GLASS_DisplayString &rArr; WriteChar &rArr; HAL_LCD_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displayPastTimes
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c7]"></a>startDisplayTimeState</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.startDisplayTimeState))
+<P><STRONG><a name="[c8]"></a>startDisplayTimeState</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, main.o(i.startDisplayTimeState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = startDisplayTimeState &rArr; displayTime &rArr; BSP_LCD_GLASS_DisplayString &rArr; WriteChar &rArr; HAL_LCD_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displayTime
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c6]"></a>startSetTimeState</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, main.o(i.startSetTimeState))
+<P><STRONG><a name="[c7]"></a>startSetTimeState</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, main.o(i.startSetTimeState))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = startSetTimeState &rArr; updateTimeSetScreen &rArr; displaySetTime &rArr; BSP_LCD_GLASS_DisplayString &rArr; WriteChar &rArr; HAL_LCD_Write
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;updateTimeSetScreen
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearJoystickFlags
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1244,7 +1246,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displaySetTime
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSetTimeState
+<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;startSetTimeState
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;incrementTimeSetting
 </UL>
