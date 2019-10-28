@@ -355,8 +355,8 @@ void displayPastTimes(void)
 	time_t time1;
 	time_t time2;
 	getPastTimes(&time1, &time2);
-	snprintf(lcd_buffer, 32, "%02d %02d %02d - %02d %02d %02d  -- ", time1.hour, time1.minute, time1.second, time2.hour, time2.minute, time2.second);
-	BSP_LCD_GLASS_ScrollSentence((uint8_t*)lcd_buffer, 1, 800);	
+	snprintf(lcd_buffer, 32, "%02d%02d%02d - %02d%02d%02d  -- ", time1.hour, time1.minute, time1.second, time2.hour, time2.minute, time2.second);
+	BSP_LCD_GLASS_ScrollSentence((uint8_t*)lcd_buffer, 1, 400);	
 }
 
 /* Display date and time settings to screen */
@@ -370,30 +370,30 @@ void displaySetTime(char * label, uint8_t val)
 /* Pass current setting value to date and time settings display function */
 void updateTimeSetScreen (time_set_state_e * state)
 {
-    switch ((*state))
-    {
-        case TIME_SET_STATE_YEAR: 
-            displaySetTime(yearStr, (uint8_t) RTC_DateStructure.Year);
-            break;
-        case TIME_SET_STATE_MONTH: 
-            displaySetTime(monthStr, (uint8_t) RTC_DateStructure.Month);
-            break;
-        case TIME_SET_STATE_DAY: 
-            displaySetTime(dayStr, (uint8_t) RTC_DateStructure.Date);
-            break;
-        case TIME_SET_STATE_HOUR: 
-            displaySetTime(hourStr, (uint8_t) RTC_TimeStructure.Hours);
-            break;
-        case TIME_SET_STATE_MINUTE: 
-            displaySetTime(minuteStr, (uint8_t) RTC_TimeStructure.Minutes);
-            break;
-        case TIME_SET_STATE_SECOND: 
-            displaySetTime(secondStr, (uint8_t) RTC_TimeStructure.Seconds);
-            break;
-        case TIME_SET_STATE_CNT: 
-            while (1); //something went wrong
-        
-    }
+	switch ((*state))
+	{
+		case TIME_SET_STATE_YEAR: 
+				displaySetTime(yearStr, (uint8_t) RTC_DateStructure.Year);
+				break;
+		case TIME_SET_STATE_MONTH: 
+				displaySetTime(monthStr, (uint8_t) RTC_DateStructure.Month);
+				break;
+		case TIME_SET_STATE_DAY: 
+				displaySetTime(dayStr, (uint8_t) RTC_DateStructure.Date);
+				break;
+		case TIME_SET_STATE_HOUR: 
+				displaySetTime(hourStr, (uint8_t) RTC_TimeStructure.Hours);
+				break;
+		case TIME_SET_STATE_MINUTE: 
+				displaySetTime(minuteStr, (uint8_t) RTC_TimeStructure.Minutes);
+				break;
+		case TIME_SET_STATE_SECOND: 
+				displaySetTime(secondStr, (uint8_t) RTC_TimeStructure.Seconds);
+				break;
+		case TIME_SET_STATE_CNT: 
+				while (1); //something went wrong
+			
+	}
 }
 
 /******************* General Functions **********************/
@@ -419,14 +419,14 @@ static inline int bcd_decimal(uint8_t hex)
 /* Convert decimal to binary coded decimal */
 static inline int decimal_bcd(unsigned int num) // say num is now 100
 {
-    unsigned int ones = 0;
-    unsigned int tens = 0;
-    unsigned int temp = 0;
+	unsigned int ones = 0;
+	unsigned int tens = 0;
+	unsigned int temp = 0;
 
-    ones = num%10; // 100%10 = 0
-    temp = num/10; // 100/10 = 10, or 0x0A
-    tens = temp<<4;  
-    return (tens + ones);// so the result is A0
+	ones = num%10; // 100%10 = 0
+	temp = num/10; // 100/10 = 10, or 0x0A
+	tens = temp<<4;  
+	return (tens + ones);// so the result is A0
 }
 
 
@@ -436,20 +436,43 @@ static inline int decimal_bcd(unsigned int num) // say num is now 100
 /* Get past times from EEPROM */
 void getPastTimes (time_t * time1, time_t * time2)
 {
-	time1->hour   = 3;
-	time1->minute = 32;
-	time1->second = 36;
-	
-	time2->hour   = 4;
-	time2->minute = 42;
-	time2->second = 46;
+	/* Get time data */
+	time1->second = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation);
+	time1->minute = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+1);
+	time1->hour   = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+2);
+
+	time2->second = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+3);
+	time2->minute = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+4);
+	time2->hour   = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+5);
 }
 
 
 /* Saves current time to EEPROM */
 void saveCurrentTime(void)
 {
-    
+	/* Get most recent time data */
+	uint8_t storedSeconds = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation);
+	uint8_t storedMinutes = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+1);
+	uint8_t storedHours   = I2C_ByteRead(&pI2c_Handle,EEPROM_ADDRESS, memLocation+2);
+	
+	/* Get current time data */
+	uint8_t seconds = bcd_decimal((uint8_t) (RTC_TimeStructure.Seconds));
+	uint8_t minutes = bcd_decimal((uint8_t) (RTC_TimeStructure.Minutes));
+  uint8_t hours   = bcd_decimal((uint8_t) (RTC_TimeStructure.Hours));
+
+
+	uint16_t EE_status = 0;
+  /* Store all data */
+	EE_status |= I2C_ByteWrite(&pI2c_Handle,EEPROM_ADDRESS, memLocation,     seconds);
+	EE_status |= I2C_ByteWrite(&pI2c_Handle,EEPROM_ADDRESS, memLocation + 1, minutes);
+	EE_status |= I2C_ByteWrite(&pI2c_Handle,EEPROM_ADDRESS, memLocation + 2, hours);
+	EE_status |= I2C_ByteWrite(&pI2c_Handle,EEPROM_ADDRESS, memLocation + 3, storedSeconds);
+	EE_status |= I2C_ByteWrite(&pI2c_Handle,EEPROM_ADDRESS, memLocation + 4, storedMinutes);
+	EE_status |= I2C_ByteWrite(&pI2c_Handle,EEPROM_ADDRESS, memLocation + 5, storedHours);
+	if(EE_status != HAL_OK)
+	{
+		I2C_Error(&pI2c_Handle);
+	}
 }
 
 
@@ -620,23 +643,23 @@ static void Error_Handler(void)
 
 void SystemClock_Config(void)
 { 
-    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};                                            
 
   // RTC requires to use HSE (or LSE or LSI, suspect these two are not available)
-    //reading from RTC requires the APB clock is 7 times faster than HSE clock, 
-    //so turn PLL on and use PLL as clock source to sysclk (so to APB)
+	//reading from RTC requires the APB clock is 7 times faster than HSE clock, 
+	//so turn PLL on and use PLL as clock source to sysclk (so to APB)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE | RCC_OSCILLATORTYPE_MSI;     //RTC need either HSE, LSE or LSI           
   
-    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+	RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     
-    RCC_OscInitStruct.MSIState = RCC_MSI_ON;  
-    RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6; // RCC_MSIRANGE_6 is for 4Mhz. _7 is for 8 Mhz, _9 is for 16..., _10 is for 24 Mhz, _11 for 48Hhz
+	RCC_OscInitStruct.MSIState = RCC_MSI_ON;  
+	RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6; // RCC_MSIRANGE_6 is for 4Mhz. _7 is for 8 Mhz, _9 is for 16..., _10 is for 24 Mhz, _11 for 48Hhz
   RCC_OscInitStruct.MSICalibrationValue= RCC_MSICALIBRATION_DEFAULT;
   
     //RCC_OscInitStruct.PLL.PLLState = RCC_PLL_OFF;//RCC_PLL_NONE;
 
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;   //PLL source: either MSI, or HSI or HSE, but can not make HSE work.
   RCC_OscInitStruct.PLL.PLLM = 1;
   RCC_OscInitStruct.PLL.PLLN = 40; 
@@ -645,7 +668,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 4;   //2, 4,6, 0r 8  
     //the PLL will be MSI (4Mhz)*N /M/R = 
 
-    if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+	if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     // Initialization Error 
     while(1);
@@ -660,7 +683,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
   
     
-    if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)   //???
+	if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)   //???
   {
     // Initialization Error 
     while(1);
@@ -686,85 +709,85 @@ void SystemClock_Config(void)
 
 
 void RTC_Config(void) {
-    RTC_TimeTypeDef RTC_TimeStructure;
-    RTC_DateTypeDef RTC_DateStructure;
+	RTC_TimeTypeDef RTC_TimeStructure;
+	RTC_DateTypeDef RTC_DateStructure;
     
-            //1.1: Enable the Power Controller (PWR) APB1 interface clock:
-        __HAL_RCC_PWR_CLK_ENABLE();    
-            //1.2:  Enable access to RTC domain 
-                HAL_PWR_EnableBkUpAccess();    
-            //1.3: Select the RTC clock source
-                __HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_LSE);    
-                //RCC_RTCCLKSOURCE_LSI is defined in hal_rcc.h
-           // according to P9 of AN3371 Application Note, LSI's accuracy is not suitable for RTC application!!!! 
-                
-            //1.4: Enable RTC Clock
-            __HAL_RCC_RTC_ENABLE();   //enable RTC --see note for the Macro in _hal_rcc.h---using this Marco requires 
-                                                                //the above three lines.
-            
-    
-            //1.5  Enable LSI
-            __HAL_RCC_LSI_ENABLE();   //need to enable the LSI !!!
-                                                                //defined in _rcc.c
-            while (__HAL_RCC_GET_FLAG(RCC_FLAG_LSIRDY)==RESET) {}    //defind in rcc.c
+	//1.1: Enable the Power Controller (PWR) APB1 interface clock:
+	__HAL_RCC_PWR_CLK_ENABLE();    
+	//1.2:  Enable access to RTC domain 
+	HAL_PWR_EnableBkUpAccess();    
+	//1.3: Select the RTC clock source
+	__HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_LSE);    
+	//RCC_RTCCLKSOURCE_LSI is defined in hal_rcc.h
+ // according to P9 of AN3371 Application Note, LSI's accuracy is not suitable for RTC application!!!! 
+				
+	//1.4: Enable RTC Clock
+	__HAL_RCC_RTC_ENABLE();   //enable RTC --see note for the Macro in _hal_rcc.h---using this Marco requires 
+																												//the above three lines.
+		
+
+	//1.5  Enable LSI
+	__HAL_RCC_LSI_ENABLE();   //need to enable the LSI !!!
+																											//defined in _rcc.c
+	while (__HAL_RCC_GET_FLAG(RCC_FLAG_LSIRDY)==RESET) {}    //defind in rcc.c
 
 
-            RTCHandle.Instance = RTC;
-            RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
-            
-            RTCHandle.Init.AsynchPrediv = 127; 
-            RTCHandle.Init.SynchPrediv = 255; 
-            
-            
-            RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
-            RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-            RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-            
-        
-            if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
-            {
-                BSP_LCD_GLASS_Clear(); 
-                BSP_LCD_GLASS_DisplayString((uint8_t *)"RT I X");   
-            }
+	RTCHandle.Instance = RTC;
+	RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
+	
+	RTCHandle.Init.AsynchPrediv = 127; 
+	RTCHandle.Init.SynchPrediv = 255; 
+	
+	
+	RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
+	RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+	RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+	
 
-            RTC_DateStructure.Year = 19;
-            RTC_DateStructure.Month = RTC_MONTH_OCTOBER;
-            RTC_DateStructure.Date = 27;
-            RTC_DateStructure.WeekDay = RTC_WEEKDAY_MONDAY;
-            
-            if(HAL_RTC_SetDate(&RTCHandle,&RTC_DateStructure,RTC_FORMAT_BIN) != HAL_OK)   //BIN format is better 
-                                                        //before, must set in BCD format and read in BIN format!!
-            {
-                BSP_LCD_GLASS_Clear();
-                BSP_LCD_GLASS_DisplayString((uint8_t *)"D I X");
-            } 
+	if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
+	{
+			BSP_LCD_GLASS_Clear(); 
+			BSP_LCD_GLASS_DisplayString((uint8_t *)"RT I X");   
+	}
 
-            RTC_TimeStructure.Hours = 2;  
-            RTC_TimeStructure.Minutes = 59;
-            RTC_TimeStructure.Seconds = 55;
-            RTC_TimeStructure.TimeFormat = RTC_HOURFORMAT12_PM;
-            RTC_TimeStructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-            RTC_TimeStructure.StoreOperation = RTC_STOREOPERATION_RESET;
-            
-            if(HAL_RTC_SetTime(&RTCHandle,&RTC_TimeStructure,RTC_FORMAT_BIN) != HAL_OK)   //BIN format is better
-                                                                                                                                                //before, must set in BCD format and read in BIN format!!
-            {
-                BSP_LCD_GLASS_Clear();
-                BSP_LCD_GLASS_DisplayString((uint8_t *)"T I X");
-            }   
+	RTC_DateStructure.Year = 19;
+	RTC_DateStructure.Month = RTC_MONTH_OCTOBER;
+	RTC_DateStructure.Date = 27;
+	RTC_DateStructure.WeekDay = RTC_WEEKDAY_MONDAY;
+	
+	if(HAL_RTC_SetDate(&RTCHandle,&RTC_DateStructure,RTC_FORMAT_BIN) != HAL_OK)   //BIN format is better 
+																							//before, must set in BCD format and read in BIN format!!
+	{
+			BSP_LCD_GLASS_Clear();
+			BSP_LCD_GLASS_DisplayString((uint8_t *)"D I X");
+	} 
 
-        __HAL_RTC_TAMPER1_DISABLE(&RTCHandle);
-        __HAL_RTC_TAMPER2_DISABLE(&RTCHandle);  
-            
-            
-        HAL_RTC_WaitForSynchro(&RTCHandle); 
+	RTC_TimeStructure.Hours = 2;  
+	RTC_TimeStructure.Minutes = 59;
+	RTC_TimeStructure.Seconds = 55;
+	RTC_TimeStructure.TimeFormat = RTC_HOURFORMAT12_PM;
+	RTC_TimeStructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	RTC_TimeStructure.StoreOperation = RTC_STOREOPERATION_RESET;
+	
+	if(HAL_RTC_SetTime(&RTCHandle,&RTC_TimeStructure,RTC_FORMAT_BIN) != HAL_OK)   //BIN format is better
+																																																																			//before, must set in BCD format and read in BIN format!!
+	{
+			BSP_LCD_GLASS_Clear();
+			BSP_LCD_GLASS_DisplayString((uint8_t *)"T I X");
+	}   
+
+	__HAL_RTC_TAMPER1_DISABLE(&RTCHandle);
+	__HAL_RTC_TAMPER2_DISABLE(&RTCHandle);  
+			
+			
+	HAL_RTC_WaitForSynchro(&RTCHandle); 
     
 }
 
 
 void RTC_AlarmAConfig(void)
 {
-    RTC_AlarmTypeDef RTC_Alarm_Structure;
+	RTC_AlarmTypeDef RTC_Alarm_Structure;
 
   RTC_Alarm_Structure.Alarm = RTC_ALARM_A;
   RTC_Alarm_Structure.AlarmMask = RTC_ALARMMASK_ALL;
@@ -775,12 +798,12 @@ void RTC_AlarmAConfig(void)
             BSP_LCD_GLASS_DisplayString((uint8_t *)"A S X");
   }
 
-    __HAL_RTC_ALARM_CLEAR_FLAG(&RTCHandle, RTC_FLAG_ALRAF); //without this line, sometimes(SOMETIMES, when first time to use the alarm interrupt)
+	__HAL_RTC_ALARM_CLEAR_FLAG(&RTCHandle, RTC_FLAG_ALRAF); //without this line, sometimes(SOMETIMES, when first time to use the alarm interrupt)
                                                                             //the interrupt handler will not work!!!        
 
         //need to set/enable the NVIC for RTC_Alarm_IRQn!!!!
-    HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);   
-    HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 3, 0);  //not important ,but it is better not use the same prio as the systick
+	HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);   
+	HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 3, 0);  //not important ,but it is better not use the same prio as the systick
     
 }
 
