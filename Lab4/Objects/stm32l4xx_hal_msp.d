@@ -30,3 +30,6 @@
 .\objects\stm32l4xx_hal_msp.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h
 .\objects\stm32l4xx_hal_msp.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h
 .\objects\stm32l4xx_hal_msp.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h
+.\objects\stm32l4xx_hal_msp.o: .\inc\main.h
+.\objects\stm32l4xx_hal_msp.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery.h
+.\objects\stm32l4xx_hal_msp.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery_glass_lcd.h
