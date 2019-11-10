@@ -20,8 +20,8 @@
 
 #define __SII                              static inline int
 
-#define MAX_ADC_VAL                        65535
-#define REF_ADC_VAL                        3.3
+#define MAX_ADC_VAL                        0xFFF
+#define REF_ADC_VAL                        3300
 
 #define adc_val_t                          uint16_t
 #define flag_t                             volatile uint8_t
@@ -83,7 +83,7 @@ uint8_t              currentSpeed              = 0;                     // Curre
                      
 char                 lcd_buffer[85];                                    // LCD display buffer
   
-ADC_HandleTypeDef    Adc_Handle;
+ADC_HandleTypeDef    AdcHandle;
 
 TIM_HandleTypeDef    PWMTimer_Handle;                                   // Timer used to output PWM signal
 TIM_HandleTypeDef    PollingTimer_Handle;                               // Timer used to time polling
@@ -103,6 +103,8 @@ static void   clearJoystickFlags         (void);
 
 static void   PollingTimer_Config        (uint16_t);
 static void   PWMTimer_Config            (uint8_t);
+
+static void   ADC_Config                 (void);
 
 /* State navigation functions */
 static void   startMainState             (void);
@@ -136,6 +138,11 @@ int main(void)
 
   BSP_JOY_Init(JOY_MODE_EXTI);
 
+  
+   /* Configure the ADC peripheral */
+  ADC_Config();
+
+ 
 
   PollingTimer_Config(TEMP_POLLING_PERIOD);
 
@@ -154,6 +161,12 @@ int main(void)
     switch (state) 
     {
       case APP_STATE_MAIN:
+        /* If select pressed, direct user to temp setpoint setting state */
+        if (joystickFlags.sel_triggered)
+        {
+          joystickFlags.sel_triggered = FLAG_INACTIVE;
+          startSetTempSetpointState();
+        }
         /* If temp poll timer interrupt has been triggered */
         if (TEMP_POLL_TIMER_FLAG == FLAG_ACTIVE)
         {
@@ -164,12 +177,6 @@ int main(void)
           controlFan();
           /* Display current temperature */
           displayTemp();
-        }
-        /* If select pressed, direct user to temp setpoint setting state */
-        if (joystickFlags.sel_triggered)
-        {
-          joystickFlags.sel_triggered = FLAG_INACTIVE;
-          startSetTempSetpointState();
         }
         
         break;
@@ -289,16 +296,25 @@ static void setFanSpeed(fan_speed_t speed)
 
 /******************* Temp Read Functions ********************/
 
-static uint16_t readADCVal(void)
+static uint16_t readADCValMV(void)
 {
-  // ToDo: Implement
-  return 1400;
+  if (HAL_ADC_PollForConversion(&AdcHandle, 10) != HAL_OK)
+    {
+      Error_Handler();
+    }
+    uint32_t output = HAL_ADC_GetValue(&AdcHandle);
+    output *= REF_ADC_VAL;
+    output /= MAX_ADC_VAL;
+    currentTemperature = output;
+    /* Read the converted value */
+    return (uint16_t) output;
 }
 
 static double getTemp(void) 
 {
-  double ADCVal = (double) readADCVal();
-  return ((ADCVal * 100 / MAX_ADC_VAL) * REF_ADC_VAL);
+  double ADCVal = (double) readADCValMV();
+  /* Divide ADC value in mv by 3 to remove gain, and divide by 10 to convert to celcius */
+  return ((ADCVal / 3.2)) / 10;
 }
 
 
@@ -338,6 +354,80 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       //default
       break;
   } 
+}
+
+/**
+  * @brief  ADC configuration
+  * @param  None
+  * @retval None
+  */
+static void ADC_Config(void)
+{
+  ADC_ChannelConfTypeDef   adcConfig;
+  ADC_AnalogWDGConfTypeDef AnalogWDGConfig;
+  
+  /* Configuration of ADCx init structure: ADC parameters and regular group */
+  AdcHandle.Instance = ADC1;
+
+   if (HAL_ADC_DeInit(&AdcHandle) != HAL_OK)
+  {
+    /* ADC de-initialization Error */
+    Error_Handler();
+  }
+  
+
+  AdcHandle.Init.ClockPrescaler        = ADC_CLOCK_ASYNC_DIV1;          /* Asynchronous clock mode, input ADC clock not divided */
+  AdcHandle.Init.Resolution            = ADC_RESOLUTION_12B;             /* 12-bit resolution for converted data */
+  AdcHandle.Init.DataAlign             = ADC_DATAALIGN_RIGHT;           /* Right-alignment for converted data */
+  AdcHandle.Init.ScanConvMode          = DISABLE;                       /* Sequencer disabled (ADC conversion on only 1 channel: channel set on rank 1) */
+  AdcHandle.Init.EOCSelection          = ADC_EOC_SINGLE_CONV;           /* EOC flag picked-up to indicate conversion end */
+  AdcHandle.Init.LowPowerAutoWait      = DISABLE;                       /* Auto-delayed conversion feature disabled */
+  AdcHandle.Init.ContinuousConvMode    = ENABLE;                        /* Continuous mode enabled (automatic conversion restart after each conversion) */
+  AdcHandle.Init.NbrOfConversion       = 1;                             /* Parameter discarded because sequencer is disabled */
+  AdcHandle.Init.DiscontinuousConvMode = DISABLE;                       /* Parameter discarded because sequencer is disabled */
+  AdcHandle.Init.NbrOfDiscConversion   = 1;                             /* Parameter discarded because sequencer is disabled */
+  AdcHandle.Init.ExternalTrigConv      = ADC_SOFTWARE_START;            /* Software start to trig the 1st conversion manually, without external event */
+  AdcHandle.Init.ExternalTrigConvEdge  = ADC_EXTERNALTRIGCONVEDGE_NONE; /* Parameter discarded because software trigger chosen */
+  AdcHandle.Init.DMAContinuousRequests = DISABLE;                       /* DMA one-shot mode selected (not applied to this example) */
+  AdcHandle.Init.Overrun               = ADC_OVR_DATA_OVERWRITTEN;      /* DR register is overwritten with the last conversion result in case of overrun */
+  AdcHandle.Init.OversamplingMode      = DISABLE;
+  
+  if (HAL_ADC_Init(&AdcHandle) != HAL_OK)
+  {
+    /* ADC initialization error */
+    Error_Handler();
+  }
+  
+  /* ### - 2 - Start calibration ############################################ */
+  if (HAL_ADCEx_Calibration_Start(&AdcHandle, ADC_SINGLE_ENDED) != HAL_OK)
+  {
+    Error_Handler();
+  }
+ 
+  /* Configuration of channel on ADCx regular group on sequencer rank 1 */
+  /* Note: Considering IT occurring after each ADC conversion if ADC          */
+  /*       conversion is out of the analog watchdog window selected (ADC IT   */
+  /*       enabled), select sampling time and ADC clock with sufficient       */
+  /*       duration to not create an overhead situation in IRQHandler.        */
+  adcConfig.Channel      = ADC_CHANNEL_5;                /* Sampled channel number */
+  adcConfig.Rank         = ADC_REGULAR_RANK_1;          /* Rank of sampled channel number ADCx_CHANNEL */
+  adcConfig.SamplingTime = ADC_SAMPLETIME_6CYCLES_5;    /* Sampling time (number of clock cycles unit) */
+  adcConfig.SingleDiff   = ADC_SINGLE_ENDED;            /* Single-ended input channel */
+  adcConfig.OffsetNumber = ADC_OFFSET_NONE;             /* No offset subtraction */ 
+  adcConfig.Offset = 0;                                 /* Parameter discarded because offset correction is disabled */
+  
+  if (HAL_ADC_ConfigChannel(&AdcHandle, &adcConfig) != HAL_OK)
+  {
+    /* Channel Configuration Error */
+    Error_Handler();
+  }
+  
+  /* ### - 4 - Start conversion ############################################# */
+  if (HAL_ADC_Start(&AdcHandle) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  
 }
 
 static void Error_Handler(void)

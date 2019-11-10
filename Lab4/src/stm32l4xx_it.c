@@ -53,7 +53,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern ADC_HandleTypeDef    Adc_Handle;
+extern ADC_HandleTypeDef    AdcHandle;
 extern TIM_HandleTypeDef    PWMTimer_Handle, PollingTimer_Handle;
 
 
@@ -224,12 +224,12 @@ void EXTI9_5_IRQHandler (void)
 
 
 void ADC1_IRQHandler(void){     //there is no ADC_IRQHandler.
-	  HAL_ADC_IRQHandler(&Adc_Handle);
+	  HAL_ADC_IRQHandler(&AdcHandle);
 }
 
 void DMA2_Channel3_IRQHandler(void)
 {
-		HAL_DMA_IRQHandler(Adc_Handle.DMA_Handle);
+		HAL_DMA_IRQHandler(AdcHandle.DMA_Handle);
 }
 
 

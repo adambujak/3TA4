@@ -179,11 +179,14 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 
 
 void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
-{
+{  
   GPIO_InitTypeDef          GPIO_InitStruct;
-  static DMA_HandleTypeDef  hdma_adc;
+  static DMA_HandleTypeDef  DmaHandle;
  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
+
+
+  __HAL_RCC_GPIOA_CLK_ENABLE();
 
 	/* ADC1 Periph clock enable */
    __HAL_RCC_ADC_CLK_ENABLE();      //NO ADC1, 2 OR 3??
@@ -194,22 +197,45 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 	/* Enable DMA2 clock */
   __HAL_RCC_DMA2_CLK_ENABLE();
 
-  /*##-2- Configure peripheral GPIO ##########################################*/ 
+ /*##-2- Configure peripheral GPIO ##########################################*/
+  /* Configure GPIO pin of the selected ADC channel */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG_ADC_CONTROL;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  
+  /*##-3- Configure the DMA ##################################################*/
+  /* Configure DMA parameters */
+  DmaHandle.Instance = DMA1_Channel1;
 
- 
-	
-	
+  DmaHandle.Init.Request             = DMA_REQUEST_0;
+  DmaHandle.Init.Direction           = DMA_PERIPH_TO_MEMORY;
+  DmaHandle.Init.PeriphInc           = DMA_PINC_DISABLE;
+  DmaHandle.Init.MemInc              = DMA_MINC_ENABLE;
+  DmaHandle.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;   /* Transfer from ADC by half-word to match with ADC configuration: ADC resolution 10 or 12 bits */
+  DmaHandle.Init.MemDataAlignment    = DMA_MDATAALIGN_HALFWORD;   /* Transfer to memory by half-word to match with buffer variable type: half-word */
+  DmaHandle.Init.Mode                = DMA_CIRCULAR;              /* DMA in circular mode to match with ADC configuration: DMA continuous requests */
+  DmaHandle.Init.Priority            = DMA_PRIORITY_HIGH;
+  
+  /* Deinitialize  & Initialize the DMA for new transfer */
+  HAL_DMA_DeInit(&DmaHandle);  
+  HAL_DMA_Init(&DmaHandle);
 
+  /* Associate the initialized DMA handle to the ADC handle */
+  __HAL_LINKDMA(hadc, DMA_Handle, DmaHandle);
+  
+  /*##-4- Configure the NVIC #################################################*/
 
- 
-  //##-3- Configure the DMA  
-	//RM0351, table 45 & 46 on page 342 shows: ADC mapped to DMA1/channel 1  or to DMA2/channel 3.
+  /* NVIC configuration for DMA interrupt (transfer completion or error) */
+  /* Priority: high-priority */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+  
 
- 
-
-  __HAL_LINKDMA(hadc, DMA_Handle, hdma_adc);
-
-  //##-4- Configure the NVIC for DMA 
+  /* NVIC configuration for ADC interrupt */
+  /* Priority: high-priority */
+  HAL_NVIC_SetPriority(ADC1_2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
 
 }
   
