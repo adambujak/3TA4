@@ -79,9 +79,10 @@ double               currentTemperature;                                // Curre
 flag_t               TEMP_ABOVE_SETPOINT_FLAG  = FLAG_INACTIVE;         // Temperature is above setpoint flag
 flag_t               TEMP_POLL_TIMER_FLAG      = FLAG_INACTIVE;         // Temperature poll flag
                      
+uint8_t              currentSpeed              = 0;                     // Current Fan Speed
                      
 char                 lcd_buffer[85];                                    // LCD display buffer
-
+  
 ADC_HandleTypeDef    Adc_Handle;
 
 TIM_HandleTypeDef    PWMTimer_Handle;                                   // Timer used to output PWM signal
@@ -139,12 +140,7 @@ int main(void)
 
 
   //PollingTimer_Config(TEMP_POLLING_PERIOD);
-  PWMTimer_Config(SLOW_SPEED);
-  HAL_Delay(3000);
-  PWMTimer_Config(MEDIUM_SPEED);
-  HAL_Delay(3000);
-  PWMTimer_Config(FULL_SPEED);
-  HAL_Delay(3000);
+
   
   
   /* Initialize setpoint to current temp on reset */
@@ -255,26 +251,39 @@ static void controlFan(void)
   double tempDiff = currentTemperature - temperatureSetpoint;
   if (tempDiff > FULL_SPEED_DIFFERENCE_THRESHOLD)
   {
-    setFanSpeed(FULL_SPEED);
+    if (currentSpeed != FULL_SPEED)
+    {
+      setFanSpeed(FULL_SPEED);
+    }
     return;
   }
   if (tempDiff > MEDIUM_SPEED_DIFFERENCE_THRESHOLD)
   {
-    setFanSpeed(MEDIUM_SPEED);
+    if (currentSpeed != MEDIUM_SPEED)
+    {
+      setFanSpeed(MEDIUM_SPEED);
+    }
     return;
   }
   if (tempDiff > 0)
   {
-    setFanSpeed(SLOW_SPEED);
+    if (currentSpeed != SLOW_SPEED)
+    {
+      setFanSpeed(SLOW_SPEED);
+    }
     return;
   }
-  setFanSpeed(FAN_OFF);
+  if (currentSpeed != FAN_OFF)
+  {
+    setFanSpeed(FAN_OFF);
+  }
   return;
 }
 
 /* Set PWM signal for controlling fan speed */
 static void setFanSpeed(fan_speed_t speed) 
 {
+  currentSpeed = speed;
   PWMTimer_Config(speed);
 }
 
@@ -382,7 +391,6 @@ void PWMTimer_Config(uint8_t dutyCycle)
 {
   #define  PERIOD_VALUE       (uint32_t)(666 - 1)               /* Period Value  */
  
-
   if (dutyCycle <= 0) 
   {
     HAL_TIM_PWM_Stop(&PollingTimer_Handle, TIM_CHANNEL_2);
