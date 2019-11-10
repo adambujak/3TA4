@@ -121,7 +121,22 @@ void HAL_PPP_MspDeInit(void)
 
 void HAL_TIM_Base_MspInit (TIM_HandleTypeDef *htim)
 {
+  __HAL_RCC_TIM3_CLK_ENABLE(); //this is defined in stm32f4xx_hal_rcc.h
+	
+	
+  /*##-2- Configure the NVIC for TIMx ########################################*/
+  /* Set the TIMx priority */
+	HAL_NVIC_SetPriority(TIM3_IRQn, 1, 0);  //in _hal.c, the priority group is set to 4. 
+																					//so the range of the preemption priority is 0-15, while the range of the sub_priority is 0
+																					//here set is as 1, leave 0 to systick, as systick interrupt may case troubles. 
+  
+  /* Enable the TIMx global Interrupt */
+	HAL_NVIC_EnableIRQ(TIM3_IRQn);
+  
+  
+  
 
+  
 }
 
 
@@ -136,7 +151,30 @@ void HAL_TIM_OC_MspInit(TIM_HandleTypeDef *htim)
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 {	
 
-
+  __HAL_RCC_TIM4_CLK_ENABLE(); //this is defined in stm32f4xx_hal_rcc.h
+	
+	
+  /*##-2- Configure the NVIC for TIMx ########################################*/
+  /* Set the TIMx priority */
+	//HAL_NVIC_SetPriority(TIM4_IRQn, 1, 0);  //in _hal.c, the priority group is set to 4. 
+																					//so the range of the preemption priority is 0-15, while the range of the sub_priority is 0
+																					//here set is as 1, leave 0 to systick, as systick interrupt may case troubles. 
+  
+  /* Enable the TIMx global Interrupt */
+//	HAL_NVIC_EnableIRQ(TIM4_IRQn);
+  
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  
+  
+  GPIO_InitTypeDef   GPIO_InitStruct;
+  
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  
+  GPIO_InitStruct.Alternate = GPIO_AF2_TIM4;
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
  
 
 

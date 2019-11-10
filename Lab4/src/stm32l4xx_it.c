@@ -54,7 +54,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern ADC_HandleTypeDef    Adc_Handle;
-extern TIM_HandleTypeDef    Tim3_Handle, Tim4_Handle;
+extern TIM_HandleTypeDef    PWMTimer_Handle, PollingTimer_Handle;
 
 
 
@@ -236,12 +236,12 @@ void DMA2_Channel3_IRQHandler(void)
 
 void TIM3_IRQHandler(void)
 {
-	HAL_TIM_IRQHandler(&Tim3_Handle);
+	HAL_TIM_IRQHandler(&PollingTimer_Handle);
 }
 
 void TIM4_IRQHandler(void)
 {	
-		HAL_TIM_IRQHandler(&Tim4_Handle);
+	HAL_TIM_IRQHandler(&PWMTimer_Handle);
 }
 
 
