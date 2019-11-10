@@ -409,7 +409,7 @@ static void ADC_Config(void)
   /*       conversion is out of the analog watchdog window selected (ADC IT   */
   /*       enabled), select sampling time and ADC clock with sufficient       */
   /*       duration to not create an overhead situation in IRQHandler.        */
-  adcConfig.Channel      = ADC_CHANNEL_5;                /* Sampled channel number */
+  adcConfig.Channel      = ADC_CHANNEL_7;                /* Sampled channel number */
   adcConfig.Rank         = ADC_REGULAR_RANK_1;          /* Rank of sampled channel number ADCx_CHANNEL */
   adcConfig.SamplingTime = ADC_SAMPLETIME_6CYCLES_5;    /* Sampling time (number of clock cycles unit) */
   adcConfig.SingleDiff   = ADC_SINGLE_ENDED;            /* Single-ended input channel */
