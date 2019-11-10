@@ -16,7 +16,7 @@
 #define PWM_TIMER                          TIM1
 
 #define POLLING_TIMER                      TIM3
-#define TEMP_POLLING_PERIOD                10000   // Poll every 250 ms 
+#define TEMP_POLLING_PERIOD                1000   // Poll every 250 ms 
 
 #define __SII                              static inline int
 
@@ -87,9 +87,7 @@ ADC_HandleTypeDef    Adc_Handle;
 
 TIM_HandleTypeDef    PWMTimer_Handle;                                   // Timer used to output PWM signal
 TIM_HandleTypeDef    PollingTimer_Handle;                               // Timer used to time polling
-//TIM_OC_InitTypeDef   Tim3_OCInitStructure;
-//TIM_OC_InitTypeDef   Tim4_OCInitStructure;
-TIM_OC_InitTypeDef sConfig;
+TIM_OC_InitTypeDef   sConfig;
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -139,7 +137,7 @@ int main(void)
   BSP_JOY_Init(JOY_MODE_EXTI);
 
 
-  //PollingTimer_Config(TEMP_POLLING_PERIOD);
+  PollingTimer_Config(TEMP_POLLING_PERIOD);
 
   
   
@@ -162,6 +160,10 @@ int main(void)
           TEMP_POLL_TIMER_FLAG = FLAG_INACTIVE;
           BSP_LED_Toggle(LED4);
           currentTemperature = getTemp();
+          /* Control fan speed depending on current temperature */
+          controlFan();
+          /* Display current temperature */
+          displayTemp();
         }
         /* If select pressed, direct user to temp setpoint setting state */
         if (joystickFlags.sel_triggered)
@@ -169,10 +171,7 @@ int main(void)
           joystickFlags.sel_triggered = FLAG_INACTIVE;
           startSetTempSetpointState();
         }
-        /* Control fan speed depending on current temperature */
-        controlFan();
-        /* Display current temperature */
-        displayTemp();
+        
         break;
       
       case APP_STATE_SET_TEMP:           
@@ -393,7 +392,7 @@ void PWMTimer_Config(uint8_t dutyCycle)
  
   if (dutyCycle <= 0) 
   {
-    HAL_TIM_PWM_Stop(&PollingTimer_Handle, TIM_CHANNEL_2);
+    HAL_TIM_PWM_Stop(&PWMTimer_Handle, TIM_CHANNEL_2);
     return;
   }
   
@@ -413,14 +412,14 @@ void PWMTimer_Config(uint8_t dutyCycle)
   uint32_t uhPrescalerValue                  = (uint32_t)(SystemCoreClock / 16000000) - 1;
   
   /* Set PWM Timer instance */
-  PollingTimer_Handle.Instance               = PWM_TIMER;
+  PWMTimer_Handle.Instance               = PWM_TIMER;
 
-  PollingTimer_Handle.Init.Prescaler         = uhPrescalerValue;
-  PollingTimer_Handle.Init.Period            = PERIOD_VALUE;
-  PollingTimer_Handle.Init.ClockDivision     = 0;
-  PollingTimer_Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-  PollingTimer_Handle.Init.RepetitionCounter = 0;
-  if (HAL_TIM_PWM_Init(&PollingTimer_Handle) != HAL_OK)
+  PWMTimer_Handle.Init.Prescaler         = uhPrescalerValue;
+  PWMTimer_Handle.Init.Period            = PERIOD_VALUE;
+  PWMTimer_Handle.Init.ClockDivision     = 0;
+  PWMTimer_Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  PWMTimer_Handle.Init.RepetitionCounter = 0;
+  if (HAL_TIM_PWM_Init(&PWMTimer_Handle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
@@ -437,14 +436,14 @@ void PWMTimer_Config(uint8_t dutyCycle)
 
   /* Set the pulse value for channel 2 */
   sConfig.Pulse = PULSE_VALUE;
-  if (HAL_TIM_PWM_ConfigChannel(&PollingTimer_Handle, &sConfig, TIM_CHANNEL_2) != HAL_OK)
+  if (HAL_TIM_PWM_ConfigChannel(&PWMTimer_Handle, &sConfig, TIM_CHANNEL_2) != HAL_OK)
   {
     /* Configuration Error */
     Error_Handler();
   }
 
   /* Start channel 2 */
-  if (HAL_TIM_PWM_Start(&PollingTimer_Handle, TIM_CHANNEL_2) != HAL_OK)
+  if (HAL_TIM_PWM_Start(&PWMTimer_Handle, TIM_CHANNEL_2) != HAL_OK)
   {
     /* PWM Generation Error */
     Error_Handler();
@@ -461,7 +460,6 @@ void PWMTimer_Config(uint8_t dutyCycle)
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
   /* If general timer set corresponding flag */
-  BSP_LED_Toggle(LED4);
   if (htim->Instance == POLLING_TIMER)
   {
     TEMP_POLL_TIMER_FLAG = FLAG_ACTIVE;

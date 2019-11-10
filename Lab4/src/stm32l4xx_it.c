@@ -241,7 +241,7 @@ void TIM3_IRQHandler(void)
 
 void TIM4_IRQHandler(void)
 {	
-	HAL_TIM_IRQHandler(&PWMTimer_Handle);
+	HAL_TIM_IRQHandler(&PollingTimer_Handle);
 }
 
 
