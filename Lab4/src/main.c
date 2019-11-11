@@ -16,7 +16,7 @@
 #define PWM_TIMER                          TIM1
 
 #define POLLING_TIMER                      TIM3
-#define TEMP_POLLING_PERIOD                1000   // Poll every 250 ms 
+#define TEMP_POLLING_PERIOD                1000 
 
 #define __SII                              static inline int
 
@@ -148,9 +148,9 @@ int main(void)
 
   
   
-  /* Initialize setpoint to current temp on reset */
+  /* Initialize setpoint to current temp + 1 on reset */
   currentTemperature  = getTemp();
-  temperatureSetpoint = currentTemperature;  
+  temperatureSetpoint = currentTemperature + 1;  
 
   /* Display the current temperature */ 
   displayTemp();
