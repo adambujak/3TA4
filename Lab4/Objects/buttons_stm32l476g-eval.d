@@ -1,4 +1,4 @@
-.\objects\buttons_stm32l476g-eval.o: C:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Boards\ST\STM32L476G-EVAL\Common\Buttons_STM32L476G-EVAL.c
+.\objects\buttons_stm32l476g-eval.o: C:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\1.4.0\Boards\ST\STM32L476G-EVAL\Common\Buttons_STM32L476G-EVAL.c
 .\objects\buttons_stm32l476g-eval.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h
 .\objects\buttons_stm32l476g-eval.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h
 .\objects\buttons_stm32l476g-eval.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h
@@ -30,4 +30,4 @@
 .\objects\buttons_stm32l476g-eval.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h
 .\objects\buttons_stm32l476g-eval.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h
 .\objects\buttons_stm32l476g-eval.o: ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h
-.\objects\buttons_stm32l476g-eval.o: C:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board\Board_Buttons.h
+.\objects\buttons_stm32l476g-eval.o: C:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.9.0\Board\Board_Buttons.h

@@ -719,13 +719,12 @@ erwork --depend=.\objects\startup_stm32l476xx.d -o.\objects\startup_stm32l476xx
 ARM Macro Assembler    Page 12 
 
 
-.o -I.\RTE\_src -IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\C
-ore\Include -IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\B
-oard -IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\In
-clude --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="
-__UVISION_VERSION SETA 528" --predefine="_RTE_ SETA 1" --predefine="STM32L476xx
- SETA 1" --list=.\listings\startup_stm32l476xx.lst RTE\Device\STM32L476VGTx\sta
-rtup_stm32l476xx.s
+.o -I.\RTE\_src -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\K
+eil_v5\ARM\PACK\Keil\MDK-Middleware\7.9.0\Board -IC:\Keil_v5\ARM\PACK\Keil\STM3
+2L4xx_DFP\1.4.0\Device\Include --predefine="__EVAL SETA 1" --predefine="__MICRO
+LIB SETA 1" --predefine="__UVISION_VERSION SETA 523" --predefine="_RTE_ SETA 1"
+ --predefine="STM32L476xx SETA 1" --list=.\listings\startup_stm32l476xx.lst RTE
+\Device\STM32L476VGTx\startup_stm32l476xx.s
 
 
 

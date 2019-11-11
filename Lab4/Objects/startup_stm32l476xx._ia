@@ -1,0 +1,7 @@
+--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"
+-I.\RTE\_src
+-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include
+-IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.9.0\Board
+-IC:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\1.4.0\Device\Include
+--pd "__UVISION_VERSION SETA 523" --pd "_RTE_ SETA 1" --pd "STM32L476xx SETA 1"
+--list .\listings\startup_stm32l476xx.lst --xref -o .\objects\startup_stm32l476xx.o --depend .\objects\startup_stm32l476xx.d "RTE\Device\STM32L476VGTx\startup_stm32l476xx.s"
