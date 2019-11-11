@@ -22,6 +22,8 @@
 
 #define MAX_ADC_VAL                        0xFFF
 #define REF_ADC_VAL                        3300
+#define ADC_TO_MV_CONVERSION_FACTOR        0.805860805
+#define MV_TO_TEMP_CONVERSION_FACTOR       0.03125
 
 #define adc_val_t                          uint16_t
 #define flag_t                             volatile uint8_t
@@ -303,8 +305,7 @@ static uint16_t readADCValMV(void)
       Error_Handler();
     }
     uint32_t output = HAL_ADC_GetValue(&AdcHandle);
-    output *= REF_ADC_VAL;
-    output /= MAX_ADC_VAL;
+    output *= ADC_TO_MV_CONVERSION_FACTOR;
     currentTemperature = output;
     /* Read the converted value */
     return (uint16_t) output;
@@ -314,7 +315,7 @@ static double getTemp(void)
 {
   double ADCVal = (double) readADCValMV();
   /* Divide ADC value in mv by 3 to remove gain, and divide by 10 to convert to celcius */
-  return ((ADCVal / 3.2)) / 10;
+  return (ADCVal * MV_TO_TEMP_CONVERSION_FACTOR);
 }
 
 
