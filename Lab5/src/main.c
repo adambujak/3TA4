@@ -57,6 +57,7 @@ volatile uint8_t  cycleDirection             = CLOCKWISE;
 volatile flag_t   stepTimerFlag              = FLAG_INACTIVE;
 volatile flag_t   joystickPressedFlag        = FLAG_INACTIVE;
 volatile flag_t   speedChangedFlag           = FLAG_INACTIVE;
+volatile flag_t   directionChangedFlag       = FLAG_INACTIVE;
 
 volatile uint8_t  rotationPeriod             = DEFAULT_ROTATION_PERIOD;
 
@@ -118,9 +119,14 @@ int main(void)
   /* Start Half Step State (default) */
   startHalfStepState();
   
-  
   while (1)
   {
+    if (directionChangedFlag == FLAG_ACTIVE)
+    {
+      directionChangedFlag = FLAG_INACTIVE;
+      initPinStateTracker(&pinStateTracker);
+      setGPIOPins(&pinStateTracker);
+    }
     switch (state)
     {
       case (APP_STATE_HALF_STEPS):
@@ -141,6 +147,7 @@ int main(void)
         /* If speed is changed, reconfigure half step timer */
         if (speedChangedFlag == FLAG_ACTIVE)
         {
+          speedChangedFlag = FLAG_INACTIVE;
           startTimer(HALF_STEP);
         }
         break;
@@ -162,6 +169,7 @@ int main(void)
         /* If speed is changed, reconfigure full step timer */
         if (speedChangedFlag == FLAG_ACTIVE)
         {
+          speedChangedFlag = FLAG_INACTIVE;
           startTimer(FULL_STEP);
         }
         break;
@@ -195,7 +203,7 @@ static void startTimer( uint8_t stepSize )
   stepTimerHandle.Init.Prescaler = prescalerValue;
   stepTimerHandle.Init.ClockDivision = 0;
   stepTimerHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
-  if(HAL_TIM_Base_Init(&stepTimerHandle) != HAL_OK) // this line need to call the callback function _MspInit() in stm32f4xx_hal_msp.c to set up peripheral clock and NVIC..
+  if(HAL_TIM_Base_Init(&stepTimerHandle) != HAL_OK) 
   {
     /* Initialization Error */
     Error_Handler();
@@ -474,6 +482,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       break;  
     case GPIO_PIN_1:     //left button
       cycleDirection ^= 1;    //Toggle Direction
+      directionChangedFlag = FLAG_ACTIVE;
       break;
     case GPIO_PIN_2:     //right button             
       break;
