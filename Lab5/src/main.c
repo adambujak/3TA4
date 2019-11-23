@@ -71,8 +71,9 @@ static void setGPIOPins          ( PinStateTracker * pinStateTracker );
 static void startHalfStepState   ( void );
 static void startFullStepState   ( void );
 
+static void startTimer           ( uint8_t stepSize );
 
-static void EXTILine14_Config(void); // configure the exti line4, for exterrnal button, WHICH BUTTON?
+static void EXTILine14_Config(void); 
 
 
 /* Private functions ---------------------------------------------------------*/
@@ -85,25 +86,26 @@ static void EXTILine14_Config(void); // configure the exti line4, for exterrnal 
 int main(void)
 {
 
-	HAL_Init();
-	
-
-	SystemClock_Config();   //sysclock is 80Hz. HClkm apb1 an apb2 are all 80Mhz.
+  HAL_Init();
   
-	HAL_InitTick(0x0000); // set systick's priority to the highest.
 
-	
-	BSP_LED_Init(LED4);
-	BSP_LED_Init(LED5);
+  SystemClock_Config();   //sysclock is 80Hz. HClkm apb1 an apb2 are all 80Mhz.
+  
+  HAL_InitTick(0x0000); // set systick's priority to the highest.
 
-	BSP_LCD_GLASS_Init();
-	
-	BSP_JOY_Init(JOY_MODE_EXTI);  
-	
+  
+  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED5);
+
+  BSP_LCD_GLASS_Init();
+  
+  BSP_JOY_Init(JOY_MODE_EXTI);  
+  
   BSP_LCD_GLASS_DisplayString((uint8_t*)"LAB 5"); 
   
   GPIO_Config();
   
+  /* Start Half Step State (default) */
   startHalfStepState();
   
   
@@ -112,11 +114,13 @@ int main(void)
     switch (state)
     {
       case (APP_STATE_HALF_STEPS):
+        /* If joystick is pressed switch states */
         if (joystickPressedFlag == FLAG_ACTIVE) 
         {
           joystickPressedFlag = FLAG_INACTIVE;
           startFullStepState();
         }
+        /* If timer interrupted, step */
         else if (stepTimerFlag == FLAG_ACTIVE)
         {
           stepTimerFlag = FLAG_INACTIVE;
@@ -125,11 +129,13 @@ int main(void)
         }
         break;
       case (APP_STATE_FULL_STEPS):
+        /* If joystick is pressed switch states */
         if (joystickPressedFlag == FLAG_ACTIVE) 
         {
           joystickPressedFlag = FLAG_INACTIVE;
           startHalfStepState();
         }
+        /* If timer interrupted, step */
         else if (stepTimerFlag == FLAG_ACTIVE)
         {
           stepTimerFlag = FLAG_INACTIVE;
@@ -141,11 +147,16 @@ int main(void)
         while(1); // Something went wrong
         break;
     } 
-	}
+  }
   return 0;
 }
 
-void startTimer( uint8_t stepSize )
+/**
+  * @brief  Configure Timer
+  * @param  stepSize - Half Step or Full Step
+  * @retval None
+  */
+static void startTimer( uint8_t stepSize )
 { 
   /* Compute the prescaler value to have TIM2 counter clock equal to 10 KHz */
   uint16_t prescalerValue = (uint16_t) (SystemCoreClock/ 5000) - 1;
@@ -298,7 +309,7 @@ static void togglePinState ( GPIO_PinState * pinState )
 static void GPIO_Config ( void )
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
- 	__HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   
   GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull  = GPIO_PULLDOWN;
@@ -336,27 +347,27 @@ static void GPIO_Config ( void )
 
 void SystemClock_Config(void)
 { 
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};                                            
 
   // RTC requires to use HSE (or LSE or LSI, suspect these two are not available)
-	//reading from RTC requires the APB clock is 7 times faster than HSE clock, 
-	//so turn PLL on and use PLL as clock source to sysclk (so to APB)
+  //reading from RTC requires the APB clock is 7 times faster than HSE clock, 
+  //so turn PLL on and use PLL as clock source to sysclk (so to APB)
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;            
-	RCC_OscInitStruct.MSIState = RCC_MSI_ON;  
-	RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6; // RCC_MSIRANGE_6 is for 4Mhz. _7 is for 8 Mhz, _9 is for 16..., _10 is for 24 Mhz, _11 for 48Hhz
+  RCC_OscInitStruct.MSIState = RCC_MSI_ON;  
+  RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6; // RCC_MSIRANGE_6 is for 4Mhz. _7 is for 8 Mhz, _9 is for 16..., _10 is for 24 Mhz, _11 for 48Hhz
   RCC_OscInitStruct.MSICalibrationValue= RCC_MSICALIBRATION_DEFAULT;
 
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;   //PLL source: either MSI, or HSI or HSE, but can not make HSE work.
   RCC_OscInitStruct.PLL.PLLM = 1;
   RCC_OscInitStruct.PLL.PLLN = 40; 
   RCC_OscInitStruct.PLL.PLLR = 2;  //2,4,6 or 8
   RCC_OscInitStruct.PLL.PLLP = 7;   // or 17.
   RCC_OscInitStruct.PLL.PLLQ = 4;   //2, 4,6, 0r 8  
-	//the PLL will be MSI (4Mhz)*N /M/R = 
+  //the PLL will be MSI (4Mhz)*N /M/R = 
 
-	if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     // Initialization Error 
     while(1);
@@ -370,8 +381,8 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
   
-	
-	if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)   //???
+  
+  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)   //???
   {
     // Initialization Error 
     while(1);
@@ -407,32 +418,31 @@ void SystemClock_Config(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   switch (GPIO_Pin) {
-			case GPIO_PIN_0: 		               //SELECT button					
-						joystickPressedFlag = FLAG_ACTIVE;
-						break;	
-			case GPIO_PIN_1:     //left button
-							
-							break;
-			case GPIO_PIN_2:    //right button						 
-						
-							break;
-			case GPIO_PIN_3:    //up button
-				
-							break;
-			
-			case GPIO_PIN_5:    //down button						
-						
-							break;
-			default://
-						//default
-						break;
-	  } 
+      case GPIO_PIN_0:                   //SELECT button          
+            joystickPressedFlag = FLAG_ACTIVE;
+            break;  
+      case GPIO_PIN_1:     //left button
+              
+              break;
+      case GPIO_PIN_2:    //right button             
+            
+              break;
+      case GPIO_PIN_3:    //up button
+        
+              break;
+      
+      case GPIO_PIN_5:    //down button           
+            
+              break;
+      default://
+            //default
+            break;
+    } 
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	stepTimerFlag = FLAG_ACTIVE;
-  BSP_LED_Toggle(LED4);
+  stepTimerFlag = FLAG_ACTIVE;
 }
 
 
