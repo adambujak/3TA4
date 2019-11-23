@@ -47,8 +47,8 @@ GPIO_PinState     pinStatesArray[POLE_CNT];
 uint16_t          pins[POLE_CNT]             = {GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 PinStateTracker   pinStateTracker            = {pinStatesArray, GPIOE, pins, POLE_CNT, 0};
                  
-flag_t            stepTimerFlag              = FLAG_INACTIVE;
-flag_t            joystickPressedFlag        = FLAG_INACTIVE;
+volatile flag_t   stepTimerFlag              = FLAG_INACTIVE;
+volatile flag_t   joystickPressedFlag        = FLAG_INACTIVE;
                  
 TIM_HandleTypeDef stepTimerHandle;     
                  
@@ -223,8 +223,7 @@ static void startFullStepState ( void )
 static void initPinStateTracker ( PinStateTracker * pinStateTracker )
 {
   pinStateTracker->currentIndex = 0;
-  pinStateTracker->pinStates[0] = GPIO_PIN_SET;
-  for (uint8_t i = 1; i < pinStateTracker->size; i++)
+  for (uint8_t i = 0; i < pinStateTracker->size; i++)
   {
     pinStateTracker->pinStates[i] = GPIO_PIN_RESET;
   }
@@ -252,10 +251,17 @@ static void halfStep ( PinStateTracker * pinStateTracker )
 {
   pincnt_t nextIndex = (pinStateTracker->currentIndex + 1) % pinStateTracker->size;
   
-  if (pinStateTracker->pinStates[nextIndex] == GPIO_PIN_RESET)
+  /* Base Case - nothing set for any state */
+  if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_RESET)
+  {
+    pinStateTracker->pinStates[pinStateTracker->currentIndex] = GPIO_PIN_SET;
+  }
+  /* Half Step State - if next pin is clear, set the next pin */
+  else if (pinStateTracker->pinStates[nextIndex] == GPIO_PIN_RESET)
   {
     pinStateTracker->pinStates[nextIndex] = GPIO_PIN_SET;
   }
+  /* Full Step State - if next pin is set, clear current pin */
   else
   {
     pinStateTracker->pinStates[pinStateTracker->currentIndex] = GPIO_PIN_RESET;
@@ -272,28 +278,17 @@ static void fullStep ( PinStateTracker * pinStateTracker )
 {
   pincnt_t nextIndex = (pinStateTracker->currentIndex + 1) % pinStateTracker->size;
   
-  if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_SET)
+  /* Base Case - nothing set for any state */
+  if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_RESET)
+  {
+    pinStateTracker->pinStates[pinStateTracker->currentIndex] = GPIO_PIN_SET;
+  }
+  /* If current pin is set, set the next one and clear current one */
+  else if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_SET)
   {
     pinStateTracker->pinStates[pinStateTracker->currentIndex] = GPIO_PIN_RESET;
     pinStateTracker->pinStates[nextIndex] = GPIO_PIN_SET;
     pinStateTracker->currentIndex = nextIndex;
-  }
-}
-
-/**
-  * @brief  Toggle Pin State
-  * @param  Pointer to pin state
-  * @retval None
-  */
-static void togglePinState ( GPIO_PinState * pinState )
-{
-  if (*pinState == GPIO_PIN_RESET)
-  {
-    *pinState = GPIO_PIN_SET;
-  }
-  else
-  {
-    *pinState = GPIO_PIN_RESET;
   }
 }
 
