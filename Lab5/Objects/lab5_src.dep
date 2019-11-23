@@ -1,626 +1,0 @@
-Dependencies for Project 'lab5', Target 'src': (DO NOT MODIFY !)
-F (.\src\main.c)(0x5DD9BE83)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (.\inc\main.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery.h)(0x58F919DF)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery_glass_lcd.h)(0x58F919DF)
-F (.\src\stm32l4xx_hal_msp.c)(0x5DD99633)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_msp.o --omf_browse .\objects\stm32l4xx_hal_msp.crf --depend .\objects\stm32l4xx_hal_msp.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (.\src\stm32l4xx_it.c)(0x5DD99633)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_it.o --omf_browse .\objects\stm32l4xx_it.crf --depend .\objects\stm32l4xx_it.d)
-I (.\inc\main.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery.h)(0x58F919DF)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery_glass_lcd.h)(0x58F919DF)
-I (.\inc\stm32l4xx_it.h)(0x5DD99633)
-F (.\inc\main.h)(0x5DD99633)()
-F (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)()
-F (.\inc\stm32l4xx_it.h)(0x5DD99633)()
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery_glass_lcd.c)(0x58F919DF)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l476g_discovery_glass_lcd.o --omf_browse .\objects\stm32l476g_discovery_glass_lcd.crf --depend .\objects\stm32l476g_discovery_glass_lcd.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery_glass_lcd.h)(0x58F919DF)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery.h)(0x58F919DF)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery.c)(0x58F919DF)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l476g_discovery.o --omf_browse .\objects\stm32l476g_discovery.crf --depend .\objects\stm32l476g_discovery.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery\stm32l476g_discovery.h)(0x58F919DF)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal.c)(0x58F9EC72)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal.o --omf_browse .\objects\stm32l4xx_hal.crf --depend .\objects\stm32l4xx_hal.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_cortex.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_cortex.o --omf_browse .\objects\stm32l4xx_hal_cortex.crf --depend .\objects\stm32l4xx_hal_cortex.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_gpio.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_gpio.o --omf_browse .\objects\stm32l4xx_hal_gpio.crf --depend .\objects\stm32l4xx_hal_gpio.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_lcd.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_lcd.o --omf_browse .\objects\stm32l4xx_hal_lcd.crf --depend .\objects\stm32l4xx_hal_lcd.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_pwr.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_pwr.o --omf_browse .\objects\stm32l4xx_hal_pwr.crf --depend .\objects\stm32l4xx_hal_pwr.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_pwr_ex.c)(0x58F91941)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_pwr_ex.o --omf_browse .\objects\stm32l4xx_hal_pwr_ex.crf --depend .\objects\stm32l4xx_hal_pwr_ex.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_rcc.c)(0x58F91941)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_rcc.o --omf_browse .\objects\stm32l4xx_hal_rcc.crf --depend .\objects\stm32l4xx_hal_rcc.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_rcc_ex.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_rcc_ex.o --omf_browse .\objects\stm32l4xx_hal_rcc_ex.crf --depend .\objects\stm32l4xx_hal_rcc_ex.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_tim.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_tim.o --omf_browse .\objects\stm32l4xx_hal_tim.crf --depend .\objects\stm32l4xx_hal_tim.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_tim_ex.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_tim_ex.o --omf_browse .\objects\stm32l4xx_hal_tim_ex.crf --depend .\objects\stm32l4xx_hal_tim_ex.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_i2c.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_i2c.o --omf_browse .\objects\stm32l4xx_hal_i2c.crf --depend .\objects\stm32l4xx_hal_i2c.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_i2c_ex.c)(0x58F91941)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_i2c_ex.o --omf_browse .\objects\stm32l4xx_hal_i2c_ex.crf --depend .\objects\stm32l4xx_hal_i2c_ex.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_dma.c)(0x58F91942)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\stm32l4xx_hal_dma.o --omf_browse .\objects\stm32l4xx_hal_dma.crf --depend .\objects\stm32l4xx_hal_dma.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-F (C:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Boards\ST\STM32L476G-EVAL\Common\Buttons_STM32L476G-EVAL.c)(0x55AFF27C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\buttons_stm32l476g-eval.o --omf_browse .\objects\buttons_stm32l476g-eval.crf --depend .\objects\buttons_stm32l476g-eval.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-I (C:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board\Board_Buttons.h)(0x5D14C62A)
-F (C:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Boards\ST\STM32L476G-EVAL\Common\LED_STM32L476G-EVAL.c)(0x55AFF27C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\led_stm32l476g-eval.o --omf_browse .\objects\led_stm32l476g-eval.crf --depend .\objects\led_stm32l476g-eval.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
-I (C:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board\Board_LED.h)(0x5D14C62A)
-F (RTE\Device\STM32L476VGTx\startup_stm32l476xx.s)(0x5DD99633)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include--pd "__UVISION_VERSION SETA 528" --pd "_RTE_ SETA 1" --pd "STM32L476xx SETA 1"--list .\listings\startup_stm32l476xx.lst --xref -o .\objects\startup_stm32l476xx.o --depend .\objects\startup_stm32l476xx.d)
-F (RTE\Device\STM32L476VGTx\system_stm32l4xx.c)(0x5DD99633)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I .\inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\STM32L476G-Discovery -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\BSP\Components\Common -I ..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include-I.\RTE\_src-IC:\Users\Adam\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.9.0\Board-IC:\Users\Adam\AppData\Local\Arm\Packs\Keil\STM32L4xx_DFP\1.4.0\Device\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32L476xx -DSTM32L476xx -DUSE_HAL_DRIVER -DUSE_STM32L476G_DISCO_REVC-o .\objects\system_stm32l4xx.o --omf_browse .\objects\system_stm32l4xx.crf --depend .\objects\system_stm32l4xx.d)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\stm32l476xx.h)(0x58F91939)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cm4.h)(0x58F918F2)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmInstr.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\cmsis_armcc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmFunc.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Include\core_cmSimd.h)(0x58F918F2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include\system_stm32l4xx.h)(0x58F91935)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal.h)(0x58F9EC72)
-I (.\inc\stm32l4xx_hal_conf.h)(0x5DD99633)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_def.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x58F91943)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC22A2)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_rcc_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_gpio_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_dma.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_cortex.h)(0x58F91942)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ex.h)(0x58F91943)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_flash_ramfunc.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_lcd.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_pwr_ex.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim.h)(0x58F91944)
-I (..\STM32Cube_FW_L4_V1.8.0\Drivers\STM32L4xx_HAL_Driver\Inc\stm32l4xx_hal_tim_ex.h)(0x58F91943)
