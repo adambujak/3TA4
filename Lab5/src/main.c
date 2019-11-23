@@ -11,11 +11,15 @@
 #define FLAG_INACTIVE               0
 
 #define STEP_TIMER                  TIM3
-#define ROTATION_PERIOD             47
+#define DEFAULT_ROTATION_PERIOD     47
+#define STEP_CNT                    48
 #define POLE_CNT                    4
 
 #define FULL_STEP                   1
 #define HALF_STEP                   0
+
+#define CLOCKWISE                   0
+#define COUNTER_CLOCKWISE           1
 
 
 
@@ -46,13 +50,21 @@ __IO HAL_StatusTypeDef Hal_status;  //HAL_ERROR, HAL_TIMEOUT, HAL_OK, of HAL_BUS
 GPIO_PinState     pinStatesArray[POLE_CNT];
 uint16_t          pins[POLE_CNT]             = {GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 PinStateTracker   pinStateTracker            = {pinStatesArray, GPIOE, pins, POLE_CNT, 0};
-                 
+
+volatile uint8_t  cycleDirection             = CLOCKWISE;
+
+
 volatile flag_t   stepTimerFlag              = FLAG_INACTIVE;
 volatile flag_t   joystickPressedFlag        = FLAG_INACTIVE;
-                 
+volatile flag_t   speedChangedFlag           = FLAG_INACTIVE;
+
+volatile uint8_t  rotationPeriod             = DEFAULT_ROTATION_PERIOD;
+
 TIM_HandleTypeDef stepTimerHandle;     
                  
 app_state_e       state;
+
+
                  
 char              lcd_buffer[6];    
 
@@ -101,8 +113,6 @@ int main(void)
   
   BSP_JOY_Init(JOY_MODE_EXTI);  
   
-  BSP_LCD_GLASS_DisplayString((uint8_t*)"LAB 5"); 
-  
   GPIO_Config();
   
   /* Start Half Step State (default) */
@@ -119,13 +129,19 @@ int main(void)
         {
           joystickPressedFlag = FLAG_INACTIVE;
           startFullStepState();
+          break;
         }
         /* If timer interrupted, step */
-        else if (stepTimerFlag == FLAG_ACTIVE)
+        if (stepTimerFlag == FLAG_ACTIVE)
         {
           stepTimerFlag = FLAG_INACTIVE;
           halfStep(&pinStateTracker);
           setGPIOPins(&pinStateTracker);
+        }
+        /* If speed is changed, reconfigure half step timer */
+        if (speedChangedFlag == FLAG_ACTIVE)
+        {
+          startTimer(HALF_STEP);
         }
         break;
       case (APP_STATE_FULL_STEPS):
@@ -134,13 +150,19 @@ int main(void)
         {
           joystickPressedFlag = FLAG_INACTIVE;
           startHalfStepState();
+          break;
         }
         /* If timer interrupted, step */
-        else if (stepTimerFlag == FLAG_ACTIVE)
+        if (stepTimerFlag == FLAG_ACTIVE)
         {
           stepTimerFlag = FLAG_INACTIVE;
           fullStep(&pinStateTracker);
           setGPIOPins(&pinStateTracker);
+        }
+        /* If speed is changed, reconfigure full step timer */
+        if (speedChangedFlag == FLAG_ACTIVE)
+        {
+          startTimer(FULL_STEP);
         }
         break;
       case (APP_STATE_CNT):
@@ -164,7 +186,7 @@ static void startTimer( uint8_t stepSize )
   
   /* Set TIM2 instance */
   stepTimerHandle.Instance = STEP_TIMER;
-  uint32_t period = (ROTATION_PERIOD * DIVISOR) / POLE_CNT;
+  uint32_t period = (rotationPeriod * DIVISOR) / STEP_CNT;
   if (stepSize == HALF_STEP)
   {
     period /= 2;
@@ -198,6 +220,7 @@ static void startHalfStepState ( void )
   joystickPressedFlag = FLAG_INACTIVE;
   initPinStateTracker(&pinStateTracker);
   setGPIOPins(&pinStateTracker);
+  BSP_LCD_GLASS_DisplayString((uint8_t*)"HALF"); 
   startTimer(HALF_STEP);
 }
 
@@ -213,6 +236,7 @@ static void startFullStepState ( void )
   joystickPressedFlag = FLAG_INACTIVE;
   initPinStateTracker(&pinStateTracker);
   setGPIOPins(&pinStateTracker);
+  BSP_LCD_GLASS_DisplayString((uint8_t*)"FULL"); 
   startTimer(FULL_STEP);
 }
 /**
@@ -243,13 +267,40 @@ static void setGPIOPins ( PinStateTracker * pinStateTracker )
 }
 
 /**
+  * @brief  Get next index in pinstate array
+  * @param  currentIndex - current index in pinstate array
+  * @retval next index in pinstate array
+  */
+static pincnt_t getNextIndex ( pincnt_t currentIndex, pincnt_t size, uint8_t direction )
+{
+  if (direction == COUNTER_CLOCKWISE)
+  {
+     if (currentIndex == 0)
+    {
+      return (size-1);
+    }
+    return (currentIndex - 1);
+  }
+  if (direction == CLOCKWISE)
+  {
+     if (currentIndex == (size - 1))
+    {
+      return 0;
+    }
+    return (currentIndex + 1);
+  }
+}
+
+
+
+/**
   * @brief  Half Step 
   * @param  Pointer to pin state tracker
   * @retval None
   */
 static void halfStep ( PinStateTracker * pinStateTracker )
 {
-  pincnt_t nextIndex = (pinStateTracker->currentIndex + 1) % pinStateTracker->size;
+  pincnt_t nextIndex = getNextIndex(pinStateTracker->currentIndex, pinStateTracker->size, (cycleDirection ^ 1));
   
   /* Base Case - nothing set for any state */
   if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_RESET)
@@ -276,7 +327,7 @@ static void halfStep ( PinStateTracker * pinStateTracker )
   */
 static void fullStep ( PinStateTracker * pinStateTracker )
 {
-  pincnt_t nextIndex = (pinStateTracker->currentIndex + 1) % pinStateTracker->size;
+  pincnt_t nextIndex = getNextIndex(pinStateTracker->currentIndex, pinStateTracker->size, cycleDirection);
   
   /* Base Case - nothing set for any state */
   if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_RESET)
@@ -416,27 +467,36 @@ void SystemClock_Config(void)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  switch (GPIO_Pin) {
-      case GPIO_PIN_0:                   //SELECT button          
-            joystickPressedFlag = FLAG_ACTIVE;
-            break;  
-      case GPIO_PIN_1:     //left button
-              
-              break;
-      case GPIO_PIN_2:    //right button             
-            
-              break;
-      case GPIO_PIN_3:    //up button
-        
-              break;
-      
-      case GPIO_PIN_5:    //down button           
-            
-              break;
-      default://
-            //default
-            break;
-    } 
+  switch (GPIO_Pin) 
+  {
+    case GPIO_PIN_0:                   //SELECT button          
+      joystickPressedFlag = FLAG_ACTIVE;
+      break;  
+    case GPIO_PIN_1:     //left button
+      cycleDirection ^= 1;    //Toggle Direction
+      break;
+    case GPIO_PIN_2:     //right button             
+      break;
+    
+    case GPIO_PIN_3:     //up button
+      if (rotationPeriod >= 5)
+      {
+        rotationPeriod -= 5;
+      }
+      speedChangedFlag = FLAG_ACTIVE;
+      break;
+    
+    case GPIO_PIN_5:     //down button   
+      if (rotationPeriod <= 250)
+      {
+        rotationPeriod += 5;
+      }      
+      speedChangedFlag = FLAG_ACTIVE;
+      break;
+    
+    default:
+      break;
+  } 
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
