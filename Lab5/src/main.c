@@ -158,17 +158,18 @@ int main(void)
   */
 static void startTimer( uint8_t stepSize )
 { 
+  #define DIVISOR 5000
   /* Compute the prescaler value to have TIM2 counter clock equal to 10 KHz */
-  uint16_t prescalerValue = (uint16_t) (SystemCoreClock/ 5000) - 1;
+  uint16_t prescalerValue = (uint16_t) (SystemCoreClock / DIVISOR) - 1;
   
   /* Set TIM2 instance */
   stepTimerHandle.Instance = STEP_TIMER;
-  float period = ROTATION_PERIOD / POLE_CNT;
+  uint32_t period = (ROTATION_PERIOD * DIVISOR) / POLE_CNT;
   if (stepSize == HALF_STEP)
   {
     period /= 2;
   }
-  stepTimerHandle.Init.Period = ((uint16_t)(period*5000)) - 1;
+  stepTimerHandle.Init.Period = ((uint16_t)(period)) - 1;
   stepTimerHandle.Init.Prescaler = prescalerValue;
   stepTimerHandle.Init.ClockDivision = 0;
   stepTimerHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -327,6 +328,9 @@ static void GPIO_Config ( void )
   GPIO_InitStruct.Pin = GPIO_PIN_15;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
   
+  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  
 }
 
 
@@ -443,6 +447,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   stepTimerFlag = FLAG_ACTIVE;
+  HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_10);
 }
 
 
