@@ -189,7 +189,7 @@ int main(void)
 static void startTimer( uint8_t stepSize )
 { 
   #define DIVISOR 5000
-  /* Compute the prescaler value to have TIM2 counter clock equal to 10 KHz */
+  /* Compute the prescaler value to have TIM3 counter clock equal to 5 kHz */
   uint16_t prescalerValue = (uint16_t) (SystemCoreClock / DIVISOR) - 1;
   
   /* Set TIM2 instance */
