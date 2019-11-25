@@ -308,7 +308,7 @@ static pincnt_t getNextIndex ( pincnt_t currentIndex, pincnt_t size, uint8_t dir
   */
 static void halfStep ( PinStateTracker * pinStateTracker )
 {
-  pincnt_t nextIndex = getNextIndex(pinStateTracker->currentIndex, pinStateTracker->size, (cycleDirection ^ 1));
+  pincnt_t nextIndex = getNextIndex(pinStateTracker->currentIndex, pinStateTracker->size, (cycleDirection));
   
   /* Base Case - nothing set for any state */
   if (pinStateTracker->pinStates[pinStateTracker->currentIndex] == GPIO_PIN_RESET)
