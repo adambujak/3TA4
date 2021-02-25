@@ -16,9 +16,9 @@
 typedef enum
 {
   APP_STATE_PREGAME = 0,     // LED blinking state, waiting for user input
-  APP_STATE_START, // Start game state, wait random amount of time to turn LED on
+  APP_STATE_START,           // Start game state, wait random amount of time to turn LED on
   APP_STATE_GAME,            // Game in session state
-  APP_STATE_RESULT, // Result state - display result, and store result if neccessary
+  APP_STATE_RESULT,          // Result state - display result, and store result if neccessary
   APP_STATE_CNT              // Number of states
 } app_state_e;
 
@@ -62,7 +62,7 @@ uint16_t reflexRecord = MAX_REACTION_TIME-1;                    // Record reflex
 
 /* To calculate reflex time, we can take the difference between the timers counts */
 
-uint32_t initialTimerValue = 0; // Initial timer tick count - set when LED is turned on 
+uint32_t initialTimerValue = 0; // Initial timer tick count - set when LED is turned on
 uint32_t finalTimerValue = 0; // Final timer tick count - set when user releases button
 
 /* Timer Interrupt Flags */
@@ -145,12 +145,12 @@ int main ( void )
 
   /* Configure User Input Joystick */
   BSP_JOY_Init(JOY_MODE_EXTI);
-    
-    /* Start EEPROM */
-    EEPROM_Config();
 
-    /* Start EEPROM */
-    RNG_Config();
+  /* Start EEPROM */
+  EEPROM_Config();
+
+  /* Start EEPROM */
+  RNG_Config();
 
   /* Start PREGAME State */
   PregameState_Start();
@@ -182,15 +182,15 @@ int main ( void )
           StartState_Start();
           break;
         }
-				/* If user reset button pressed */
+        /* If user reset button pressed */
         if (USER_RST_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
           /* Claer reset button flag */
           USER_RST_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
           /* Reset Record */
-					resetReflexRecord();
-					/* Restart state */
-					PregameState_Start();
+          resetReflexRecord();
+          /* Restart state */
+          PregameState_Start();
           break;
         }
         break;
@@ -206,17 +206,17 @@ int main ( void )
           GameState_Start();
           break;
         }
-				if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
+        if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
           /* Clear user button flag */
           USER_BUTTON_FLAG = BUTTON_IRQ_NOT_TRIGGERED;
-					/* Restart state */
-					PregameState_Start();
+          /* Restart state */
+          PregameState_Start();
           break;
         }
         break;
       case APP_STATE_GAME:
-				drawCurrentGameTime();
+        drawCurrentGameTime();
         /* If user button pressed */
         if (USER_BUTTON_FLAG == BUTTON_IRQ_TRIGGERED)
         {
@@ -270,7 +270,7 @@ int main ( void )
 static void updateRecord ( uint16_t val )
 {
   reflexRecord = val;
-	setReflexRecord();
+  setReflexRecord();
 }
 
 /**
@@ -280,9 +280,9 @@ static void updateRecord ( uint16_t val )
  */
 static void resetReflexRecord ( void )
 {
-	/* Reset value */
-	reflexRecord = MAX_REACTION_TIME - 1;
-	setReflexRecord();
+  /* Reset value */
+  reflexRecord = MAX_REACTION_TIME - 1;
+  setReflexRecord();
 }
 
 
@@ -317,7 +317,7 @@ uint32_t getGameTimerValue ( void )
  */
 void drawCurrentGameTime ( void )
 {
-	uint32_t reactionTickCount = getGameTimerValue() - initialTimerValue;
+  uint32_t reactionTickCount = getGameTimerValue() - initialTimerValue;
   /* Calculate reaction time in seconds */
   /*
    * Formula:
@@ -406,8 +406,6 @@ void ResultState_Start ( uint32_t reactionTickCount )
 {
   state = APP_STATE_RESULT;
 
-  
-
   /* Calculate reaction time in seconds */
   /*
    * Formula:
@@ -418,13 +416,13 @@ void ResultState_Start ( uint32_t reactionTickCount )
   uint32_t reactionTime = reactionTickCount * 1000
       / (SystemCoreClock / GAME_TIMER_PRESCALER);
 
-	/* If reaction tick count is too small return to PREGAME state */
+  /* If reaction tick count is too small return to PREGAME state */
   if (reactionTickCount < MIN_REACTION_TIME)
   {
     PregameState_Start();
     return;
   }
-	
+
   /* If current reaction time is less than record, set record */
   if (reactionTime < reflexRecord)
   {
@@ -451,13 +449,13 @@ void EEPROM_Config ( void )
   {
         Error_Handler();
   }
-  
+
     /* Get reflex record, if not found set to existing value */
     if (getReflexRecord())
     {
         return;
     }
-    else 
+    else
     {
         setReflexRecord();
     }
@@ -496,10 +494,10 @@ static void setReflexRecord ( void )
  */
 void RNG_Config ( void )
 {
-    Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Instance a base address. like the timer handles....                          
-  
+    Rng_Handle.Instance=RNG;  //Everytime declare a Handle, need to assign its Instance a base address. like the timer handles....
+
   uint32_t Hal_status=HAL_RNG_Init(&Rng_Handle);   //go to msp.c to see further low level initiation.
-  
+
   if( Hal_status != HAL_OK)
   {
     Error_Handler();
@@ -601,30 +599,15 @@ void GameTimer_Config ( void )
  */
 void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_Pin )
 {
-  switch (GPIO_Pin) 
-    {
-        case GPIO_PIN_0:                       //SELECT button                  
-                USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
-            break;  
-        case GPIO_PIN_1:     //left button                      
-                                USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
-            break;
-        case GPIO_PIN_2:    //right button                        to play again.
-                        
-            break;
-        case GPIO_PIN_3:    //up button                         
-                        
-            break;
-        
-        case GPIO_PIN_5:    //down button                       
-                
-            break;
-        default://
-                                //default
-            break;
-    } 
-    
-    
+  switch (GPIO_Pin)
+  {
+    case GPIO_PIN_0:     //SELECT button
+        USER_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+        break;
+    case GPIO_PIN_1:     //left button
+          USER_RST_BUTTON_FLAG = BUTTON_IRQ_TRIGGERED;
+        break;
+  }
 }
 
 /**
@@ -673,11 +656,11 @@ void SystemClock_Config ( void )
   RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
   RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
 
-  // The following clock configuration sets the Clock configuration sets after System reset                
-  // It could be avoided but it is kept to illustrate the use of HAL_RCC_OscConfig and HAL_RCC_ClockConfig 
-  // and to be eventually adapted to new clock configuration                                               
+  // The following clock configuration sets the Clock configuration sets after System reset
+  // It could be avoided but it is kept to illustrate the use of HAL_RCC_OscConfig and HAL_RCC_ClockConfig
+  // and to be eventually adapted to new clock configuration
 
-  // MSI is enabled after System reset at 4Mhz, PLL not used 
+  // MSI is enabled after System reset at 4Mhz, PLL not used
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6; // RCC_MSIRANGE_6 is for 4Mhz. _7 is for 8 Mhz, _9 is for 16..., _10 is for 24 Mhz, _11 for 48Hhz
@@ -695,13 +678,13 @@ void SystemClock_Config ( void )
 
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    // Initialization Error 
+    // Initialization Error
     while (1)
       ;
   }
 
-  // Select MSI as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers 
-  // Set 0 Wait State flash latency for 4Mhz 
+  // Select MSI as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers
+  // Set 0 Wait State flash latency for 4Mhz
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK
       | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
@@ -710,26 +693,26 @@ void SystemClock_Config ( void )
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
-    // Initialization Error 
+    // Initialization Error
     while (1)
       ;
   }
 
   // The voltage scaling allows optimizing the power consumption when the device is
   //   clocked below the maximum system frequency, to update the voltage scaling value
-  //   regarding system frequency refer to product datasheet.  
+  //   regarding system frequency refer to product datasheet.
 
-  // Enable Power Control clock 
+  // Enable Power Control clock
   __HAL_RCC_PWR_CLK_ENABLE();
 
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE2) != HAL_OK)
   {
-    // Initialization Error 
+    // Initialization Error
     while (1)
       ;
   }
 
-  // Disable Power Control clock 
+  // Disable Power Control clock
   __HAL_RCC_PWR_CLK_DISABLE();
 }
 //after RCC configuration, for timmer 2---7, which are one APB1, the TIMxCLK from RCC is 4MHz

@@ -212,7 +212,6 @@ void EXTI3_IRQHandler (void)
   * @retval None
   */
 void EXTI9_5_IRQHandler (void)
-//void EXTI5_IRQHandler (void)  //will not work!
 {
   HAL_GPIO_EXTI_IRQHandler(DOWN_JOY_PIN);  //PA5
 }
@@ -223,7 +222,7 @@ void TIM2_IRQHandler(void)
 
 void TIM3_IRQHandler(void)
 {
-  //HAL_TIM_IRQHandler(&Tim3_Handle);
+  HAL_TIM_IRQHandler(&Tim3_Handle);
 }
 
 void TIM4_IRQHandler(void)
